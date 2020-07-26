@@ -1,0 +1,71 @@
+{
+    "_id": {
+        "$oid": "5ef7d3abe22e34e25cb546ea"
+    },
+    "Username": "Albert",
+    "Password": "password10",
+    "Email": "albert@gmail.com",
+    "Birthday": {
+        "$date": "1980-01-01T00:00:00Z"
+    },
+    "FavoriteMovies": [
+        "5ef7b835da167df297d9a926",
+        "5ef7be7a6115884b7d3f0401"
+    ]
+} {
+    "_id": {
+        "$oid": "5ef7d3abe22e34e25cb546eb"
+    },
+    "Username": "Benny",
+    "Password": "password10",
+    "Email": "benny@gmail.com",
+    "Birthday": {
+        "$date": "1979-01-01T00:00:00Z"
+    },
+    "FavoriteMovies": [
+        "5ef7be7a6115884b7d3f0401",
+        "5ef7b835da167df297d9a926"
+    ]
+} {
+    "_id": {
+        "$oid": "5ef7d3abe22e34e25cb546ec"
+    },
+    "Username": "Carla",
+    "Password": "password10",
+    "Email": "carla@gmail.com",
+    "Birthday": {
+        "$date": "1978-01-01T00:00:00Z"
+    },
+    "FavoriteMovies": [
+        "5ef7b835da167df297d9a926",
+        "5ef7be7a6115884b7d3f0403"
+    ]
+} {
+    "_id": {
+        "$oid": "5ef7d3abe22e34e25cb546ed"
+    },
+    "Username": "Deann",
+    "Password": "password10",
+    "Email": "deann@gmail.com",
+    "Birthday": {
+        "$date": "1978-01-01T00:00:00Z"
+    },
+    "FavoriteMovies": [
+        "5ef7c711e22e34e25cb546e1",
+        "5ef7c711e22e34e25cb546e3"
+    ]
+} {
+    "_id": {
+        "$oid": "5ef7d3ace22e34e25cb546ee"
+    },
+    "Username": "Ethan",
+    "Password": "password10",
+    "Email": "ethan@gmail.com",
+    "Birthday": {
+        "$date": "1977-01-01T00:00:00Z"
+    },
+    "FavoriteMovies": [
+        "5ef7c711e22e34e25cb546e3",
+        "5ef7c6cfe22e34e25cb546e0"
+    ]
+}

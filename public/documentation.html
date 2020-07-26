@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>myFlix</title>
+</head>
+
+<body>
+    <h1>Documentation for myFlix</h1>
+    <p>
+        This web application gives users access to information about different movies, directors, and genres.<br />
+        Users can sign up, update their personal information, and create a list of their favorite movies.
+    </p>
+    <h2>HTTP request details</h2>
+    <div>
+        <h3>1. General App features</h3>
+        <ul>
+            <li>Method type: GET</li>
+            <li>Query Perameters: '/'</li>
+            <li>Data in Body of Request: None</li>
+            <li>Response: Welome message for app</li>
+        </ul>
+    </div>
+    <div>
+        <h3>2. Returning a list of ALL movies to the title'</li>
+            <li>Data in Body of Request: None</li>
+            <li>
+                Response: A JSON object holding the movie detials for the specific title. E.g. <br /> {title: "film name", description: "description", director: {name: "director name", bio: "director bio", birth: "birth year"}, genre: {Name: "genre",
+                description: "genre description"}, release: "year", Staring: [actors], imageURL: "URL", Featured: "Yes or No"}
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3>
+            4. Returning data about a genre (description) by name/title (e.g., “Thriller”)
+        </h3>
+        <ul>
+            <li>Method type: GET</li>
+            <li>Query Perameters: '/movies/Genres/Name'</li>
+            <li>Data in Body of Request: None</li>
+            <li>
+                Response: All JSON objects relevant to specific genre selected in format e.g. <br /> {Name: "Genre Name", Description: "genre description"}
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3>5. Returning data about a director (bio, birth year) by name</h3>
+        <ul>
+            <li>Method type: GET</li>
+            <li>Query Perameters: '/Director/Name'</li>
+            <li>Data in Body of Request: None</li>
+            <li>
+                Response: All JSON data relevant to specific director (including DOB, and other details if listed) selected in format e.g. <br /> {name: "director name", bio: "director bio", birthyear: "yyyy" }
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3>6. Allowing new users to register</h3>
+        <ul>
+            <li>Method type: POST</li>
+            <li>Query Perameters: '/users'</li>
+            <li>
+                Data in Body of Request: A JSON object holding the necessary data to create a new profile e.g. <br /> {name: "test name", email: "test@test.com", password: "test password", dateOfBirth: "test date"}
+            </li>
+            <li>
+                Response: A JSON object holding the name and email data for the new profile (not password or DOB). Now object will now include and display "id" as well e.g. <br /> {id: "new id", name: "test name", email: "test@test.com", password: "test
+                password", dateOfBirth: "test date"}
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3>7. Creating a webpage for each specific user</h3>
+        <ul>
+            <li>Method type: GET</li>
+            <li>Query Perameters: '/users/:Username'</li>
+            <li>Data in Body of Request: None</li>
+            <li>Response: Welcome text message using user.name</li>
+        </ul>
+    </div>
+    <div>
+        <h3>
+            8. Allowing users to update their user info (username, password, e-mail, date of birth)
+        </h3>
+        <ul>
+            <li>Method type: PUT</li>
+            <li>Query Perameters: '/users/:Username'</li>
+            <li>
+                Data in Body of Request: A JSON object holding the necessary data being updated in the profile e.g. <br /> {name: "new test name", email: "newtest@test.com", password: "newtest password", dateOfBirth: "new test date"}
+            </li>
+            <li>
+                Response: A text message specifying that the update was successful for specific field.
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3>9. Allowing users to add a movie to their favorites list</h3>
+        <ul>
+            <li>Method type: POST</li>
+            <li>Query Perameters: '/users/username/favorites/_id'</li>
+            <li>
+                Data in Body of Request: None (movie object already exists in app)
+            </li>
+            <li>
+                Response: A text message confirming movie successfully added to list
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3>10. Allowing users to remove a movie from their list of favorites</h3>
+        <ul>
+            <li>Method type: DELETE</li>
+            <li>Query Perameters: '/users/username/favorites/_id'</li>
+            <li>Data in Body of Request: None</li>
+            <li>
+                Response: A text message confirming movie successfully deleted from list.
+            </li>
+        </ul>
+    </div>
+    <div>
+        <h3>11. Allowing existing users to deregister</h3>
+        <ul>
+            <li>Method type: DELETE</li>
+            <li>Query Perameters: '/users/:username'</li>
+            <li>Data in Body of Request: None</li>
+            <li>
+                Response: A text message confirming successful deletion of account.
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
