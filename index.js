@@ -46,7 +46,7 @@ let auth = require('./auth')(app);
 
 // Webpage - Welcome
 app.get('/', (req, res) => {
-    res.send('Welcome to my movie data base!');
+    res.send('Welcome to Michaels movie data base!');
 });
 
 // Documentation
