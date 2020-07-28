@@ -13,7 +13,7 @@ const app = express();
 const cors = require('cors');
 
 // this restricts the origins allowed in the list below
-let allowedOrigins = ['http://localhost:8080/', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080/', 'http://https://myflix-api.herokuapp.com/'];
 
 app.use(cors({
     origin: (origin, callback) => {
