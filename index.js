@@ -44,10 +44,9 @@ require('./passport');
 const { check, validationResult } = require('express-validator');
 
 
-//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
-//mongoose.connect(process.env.CONNECTION_URI, { useNewURLParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.CONNECTION_URI, { useNewURLParser: true, useUnifiedTopology: true });
 
+mongoose.connect(process.env.CONNECTION_URI, { useNewURLParser: true, useUnifiedTopology: true });
+console.log('===== Connecting to DB ... =====', uri);
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
