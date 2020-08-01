@@ -4,16 +4,28 @@ const express = require('express'),
     uuid = require('uuid'),
     mongoose = require('mongoose'),
     Models = require('./models.js');
+const path = require('path');
 
 const Movies = Models.Movie;
 const Users = Models.User;
 
 const app = express();
 
+app.use(express.static('public'));
+app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
+
+app.get('client/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
 const cors = require('cors');
+// app.use(cors());
 
 // this restricts the origins allowed in the list below
-let allowedOrigins = ['http://localhost:8080/', 'http://https://myflix-api.herokuapp.com/'];
+let allowedOrigins = [
+    'http://localhost:8080/',
+    'http://https://myflix-api.herokuapp.com'
+];
 
 app.use(cors({
     origin: (origin, callback) => {
@@ -31,12 +43,10 @@ require('./passport');
 
 const { check, validationResult } = require('express-validator');
 
-/* mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true }); */
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-//mongoose.connect(process.env.CONNECTION_URI, 'mongodb+srv://kay:myRealPassword@myflixdb-jvame.mongodb.net/myFlixDB?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-//mongodb + srv;
-/* myflixDBadmin:control>@myflixdb.ugffl.mongodb.net/myFlixDB?retryWrites=true&w=majority */
-//mongodb + srv: //myflixDBadmin:control@myflixdb.ugffl.mongodb.net/myFlixDB?retryWrites=true&w=majority
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect(process.env.CONNECTION_URI, { useNewURLParser: true, useUnifiedTopology: true });
+//mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 app.use(morgan('common'));
