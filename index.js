@@ -5,7 +5,7 @@ const express = require('express'),
     mongoose = require('mongoose'),
     Models = require('./models.js');
 const path = require('path');
-
+require('dotenv').config()
 const Movies = Models.Movie;
 const Users = Models.User;
 
@@ -45,7 +45,11 @@ const { check, validationResult } = require('express-validator');
 
 
 
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI, () => {}, { useNewUrlParser: true })
+    .catch(err => {
+        console.log(err);
+    });
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
