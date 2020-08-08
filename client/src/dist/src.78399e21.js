@@ -30123,10 +30123,10 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       return _react.default.createElement("div", {
         className: "main-view"
       }, movies.map(function (movie) {
-        return _react.default.createElement("div", {
-          className: "movie-card",
-          key: movie._id
-        }, movie.Title);
+        return _react.default.createElement(MovieCard, {
+          key: movie._id,
+          movie: movie
+        });
       }));
     }
   }]);
