@@ -1,13 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 
+import { LoginView } from '../login-view/login-view';
+// import { RegistrationView } from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+// import { Button } from 'react-bootstrap';
+
 
 export class MainView extends React.Component {
     constructor() {
+        // Call the suopercalss constructor so React can initialize it
         super();
 
+        // Initialize the state to an empty object so we cn destructure it later
         this.state = {
             movies: null,
             selectedMovie: null,
@@ -31,7 +37,7 @@ export class MainView extends React.Component {
 
     onMovieClick(movie) {
         this.setState({
-            selectedMovie: movie,
+            selectedMovie: movie
         });
     }
 

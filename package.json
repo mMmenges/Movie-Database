@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "Movie Database",
     "dependencies": {
+        "axios": "^0.19.2",
         "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
         "cors": "^2.8.5",
@@ -18,6 +19,7 @@
         "passport-jwt": "^4.0.0",
         "passport-local": "^1.0.0",
         "react": "^16.13.1",
+        "react-bootstrap": "^1.3.0",
         "react-dom": "^16.13.1",
         "uuid": "^8.2.0"
     },
