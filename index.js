@@ -118,14 +118,11 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false
         });
 });
 
-
-// is this the key?
-
 app.post('/login',
     passport.authenticate('local'),
     function(req, res) {
-        // If this function gets called, athentification was successful.
-        // 'req.user' contains the authenticated user.
+        /* If this function gets called, athentification was successful. 
+        'req.user' contains the authenticated user. */
 
         res.redirect('/users/' + req.user.username);
     });
@@ -133,11 +130,12 @@ app.post('/login',
 
 // new users can sign up by name, email and password, and can give more information
 app.post('/users',
-    // Validation logic here for request
-    // you can either use a chain of methods like .not().isEmpty()
-    // which means "opposide of isEmpty in plain english "is not empty"
-    // or use .isLength({min: 5}) which means
-    // minimum value of 5 characters are only allowed
+    /* Validation logic here for request
+       you can either use a chain of methods like .not().isEmpty()
+       which means "opposide of isEmpty in plain english "is not empty"
+       or use .isLength({min: 5}) which means
+       minimum value of 5 characters are only allowed
+    */
     [
         check('Username', 'Username with minimum 5 characters is required.').isLength({ min: 5 }),
         check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),

@@ -3,7 +3,7 @@ import "./registration-view.scss";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import logo from "../../images/logo2.png";
+//import logo from "../../images/logo2.png";
 
 export function RegistrationView(props) {
     const [username, createUsername] = useState("");

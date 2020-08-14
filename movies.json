@@ -1,5 +1,4 @@
 // Michels movies
-
 {
     "_id": {
         "$oid": "5ef7b835da167df297d9a926"
@@ -17,7 +16,10 @@
         "Death": "2017"
     },
     "ImagePath": "silenceofthelambs.png",
-    "Actors": ["Anthony Hopkins", "Jodie Foster"],
+    "Actors": [
+        "Anthony Hopkins",
+        "Jodie Foster"
+    ],
     "Featured": true
 } {
     "_id": {
@@ -36,7 +38,10 @@
         "Death": "2025"
     },
     "ImagePath": "et.png",
-    "Actors": ["Henry Thomas", "Drew Barrymore"],
+    "Actors": [
+        "Henry Thomas",
+        "Drew Barrymore"
+    ],
     "Featured": true
 } {
     "_id": {
@@ -55,7 +60,10 @@
         "Death": "2025"
     },
     "ImagePath": "amistad.png",
-    "Actors": ["Djimon Hounsou", "Matthew McConaughey"],
+    "Actors": [
+        "Djimon Hounsou",
+        "Matthew McConaughey"
+    ],
     "Featured": true
 } {
     "_id": {
@@ -74,7 +82,10 @@
         "Death": "2025"
     },
     "ImagePath": "cmiyc.png",
-    "Actors": ["Tom Hanks", "Leonardo DiCaprio"],
+    "Actors": [
+        "Tom Hanks",
+        "Leonardo DiCaprio"
+    ],
     "Featured": true
 } {
     "_id": {
@@ -93,7 +104,10 @@
         "Death": "2025"
     },
     "ImagePath": "mdb.png",
-    "Actors": ["Hilary Swank", "Clint Eastwood"],
+    "Actors": [
+        "Hilary Swank",
+        "Clint Eastwood"
+    ],
     "Featured": true
 } {
     "_id": {
@@ -112,7 +126,10 @@
         "Death": "2025"
     },
     "ImagePath": "as.png",
-    "Actors": ["Bradley Cooper", "Sienna Miller"],
+    "Actors": [
+        "Bradley Cooper",
+        "Sienna Miller"
+    ],
     "Featured": false
 } {
     "_id": {
@@ -149,7 +166,10 @@
         "Death": "2025"
     },
     "ImagePath": "jp.png",
-    "Actors": ["Sam Neill", "Jeff Goldblum"],
+    "Actors": [
+        "Sam Neill",
+        "Jeff Goldblum"
+    ],
     "Featured": true
 } {
     "_id": {
@@ -168,7 +188,10 @@
         "Death": ""
     },
     "ImagePath": "titanic.png",
-    "Actors": ["Kate Winslet", "Leonardo Di Caprio"],
+    "Actors": [
+        "Kate Winslet",
+        "Leonardo Di Caprio"
+    ],
     "Featured": true
 } {
     "_id": {
@@ -186,7 +209,10 @@
         "Birth": "1930",
         "Death": "2025"
     },
-    "ImagePath": "mdb.png",
-    "Actors": ["Hilary Swank", "Clint Eastwood"],
+    "ImagePath": "gt.png",
+    "Actors": [
+        "Hilary Swank",
+        "Clint Eastwood"
+    ],
     "Featured": true
 }
