@@ -10,8 +10,7 @@
 <body>
     <h1>Documentation for myFlix</h1>
     <p>
-        This web application gives users access to information about different movies, directors, and genres.<br />
-        Users can sign up, update their personal information, and create a list of their favorite movies.
+        This web application gives users access to information about different movies, directors, and genres.<br /> Users can sign up, update their personal information, and create a list of their favorite movies.
     </p>
     <h2>HTTP request details</h2>
     <div>
@@ -24,7 +23,8 @@
         </ul>
     </div>
     <div>
-        <h3>2. Returning a list of ALL movies to the title'</li>
+        <h3>2. Returning a list of ALL movies to the title'</h3>
+        <ul>
             <li>Data in Body of Request: None</li>
             <li>
                 Response: A JSON object holding the movie detials for the specific title. E.g. <br /> {title: "film name", description: "description", director: {name: "director name", bio: "director bio", birth: "birth year"}, genre: {Name: "genre",
@@ -87,7 +87,8 @@
             <li>Method type: PUT</li>
             <li>Query Perameters: '/users/:Username'</li>
             <li>
-                Data in Body of Request: A JSON object holding the necessary data being updated in the profile e.g. <br /> {name: "new test name", email: "newtest@test.com", password: "newtest password", dateOfBirth: "new test date"}
+                Data in Body of Request: A JSON object holding the necessary data being updated in the profile e.g.
+                <br /> {name: "new test name", email: "newtest@test.com", password: "newtest password", dateOfBirth: "new test date"}
             </li>
             <li>
                 Response: A text message specifying that the update was successful for specific field.

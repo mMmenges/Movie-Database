@@ -1,0 +1,22 @@
+.movies-filter-wrapper {
+    max-width: 250px;
+    padding-top: 100px;
+    margin: auto;
+    margin-right: 20px;
+}
+
+.card.deck {
+    padding-top: 20px;
+}
+
+.filter-empty-movies {
+    padding-top: 20px;
+    color: goldenrod;
+}
+
+.empty-favourites {
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+    color: goldenrod;
+}

@@ -1,32 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import Badge from 'react-bootstrap/Badge';
+import axios from 'axios';
+import './director-view.scss';
 
-export class DirectorView extends React.Component {
-    constructor() {
-        super();
-        this.state = {};
-    }
+export function DirectorView(props) {
+    const [director, setDirector] = useState(null);
 
-    render() {
-        const { director } = this.props;
-        return (
-            <div
-                className="container-fluid align-items-center ml-3 mt-2"
-                style={{ width: "660px" }}
-            >
-                <div className="director-title">
-                    <h1>{director.Name}</h1>
-                </div>
-                <div className="director-bio mt-1 mb-3">Bio: {director.Bio}</div>
-                <div className="director-birth">Born: {director.Birth}</div>
-                <div className="director-birth">Death: {director.Death}</div>
-                <Link to={`/`}>
-                    <Button className="mt-3" variant="primary">
-                        Back to Movies
-          </Button>
-                </Link>
-            </div>
-        );
-    }
+    useEffect(() => {
+        axios.get('https://oldmyflix-api.herokuapp.com/movies/director/movies/director/' + props.directorName)
+            .then(response => {
+                setDirector(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, []);
+
+    if (!director) return null
+
+    return (
+        <div className="directorContent">
+            <Badge variant="primary">Director</Badge>{' - ' + director.Name}
+            <br />
+            <Badge variant="primary">Bio</Badge>{' - ' + director.Bio}
+            <br />
+            <Badge variant="primary">Birth year</Badge>{' - ' + director.Birth}
+        </div>
+    );
 }
+
+DirectorView.propTypes = {
+    directorName: PropTypes.string.isRequired
+};
