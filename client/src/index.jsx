@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { reateStore } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import { MainView } from './components/main-view/main-view';
@@ -24,5 +24,5 @@ class MyFlixApplication extends React.Component {
 // Finds the root of your app
 const container = document.getElementsByClassName('app-container')[0];
 
-// Tells React to render your app in the root DOM element
+// Tells React to render our app in the root DOM element
 ReactDOM.render(React.createElement(MyFlixApplication), container);
