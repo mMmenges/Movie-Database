@@ -5,11 +5,9 @@ import Form from 'react-bootstrap/Form';
 import { setFilter } from '../../actions/actions';
 import './visibility-filter-input.scss';
 
-function VisabilityFilterInput(props) {
+function VisibilityFilterInput(props) {
     return (
         <Form.Control
-            className='mb-3 filter-bar'
-
             onChange={e => props.setFilter(e.target.value)}
             value={props.visibilityFilter}
             placeholder='filter'
@@ -21,4 +19,4 @@ VisibilityFilterInput.propTypes = {
     setFilter: PropTypes.func,
 };
 
-export default connect(null, { setFilter }(VisabilityFilterInput))
+export default connect(null, { setFilter })(VisibilityFilterInput);

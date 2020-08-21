@@ -1,17 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import VisabitityFilterInput from '../visability-filter-input/visability-filter-input';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 
 import { MovieCard } from '../movie-card/movie-card';
-import '../movie-list.scss';
+import './movies-list.scss';
 
 const mapStateToProps = state => {
-    const { VisabitityFilter } = state;
-    return { VisabilityFilter };
+    const { visibilityFilter } = state;
+    return { visibilityFilter };
 };
 
 function MoviesList(props) {
+    console.log(props)
     const { moviesToShow, favouriteMovies, visibilityFilter, removeFromFavourites, addToFavourites } = props;
     let filteredMovies = moviesToShow;
     if (!moviesToShow) return <div className="main-view" />;

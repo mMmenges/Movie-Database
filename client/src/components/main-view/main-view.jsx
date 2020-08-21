@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import axios from 'axios'; //to connect to API
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -19,12 +19,11 @@ import './main-view.scss';
 import { setMovies, setUser } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 
-export class MainView extends React.Component {
-    constructor() {
+export class MainView extends Component {
+    constructor(props) {
         // Call the superclass constructor
         // so React can initialize it
-        super();
-
+        super(props);
         // Initialize the state to an empty object so we can destructure it later
         this.state = {
             user: null,
@@ -199,6 +198,7 @@ export class MainView extends React.Component {
     }
 
     render() {
+        console.log("====this===props", this.props)
         const { movies, userData, visibilityFilter } = this.props;
         const { user, isRegister, isLoading } = this.state;
         const filteredFavoriteMovies = [...new Set(userData.FavoriteMovies)]
