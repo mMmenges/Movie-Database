@@ -1,0 +1,38 @@
+$primarycolor: #ffffff;
+$secondarycolor: #000000;
+$tertiarycolor: #030C61;
+.update-profile {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 2em;
+    color: $primarycolor;
+    overflow-y: auto;
+}
+
+.update-profile {
+    margin-top: 6.1em;
+}
+
+.update-profile {
+    color: $primarycolor;
+    margin: 0 auto;
+    text-align: left;
+    max-width: 600px;
+    padding: 50px;
+}
+
+.update-item {
+    margin: 20px;
+}
+
+.update-footer {
+    text-align: center;
+}
+
+.button {
+    margin: 20px;
+    width: 150px;
+}
