@@ -1,319 +1,137 @@
+import React from 'react';
+import axios from 'axios';
 
-import React, { Component } from 'react';
-import axios from 'axios'; //to connect to API
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { MovieView } from '../movie-view/movie-view';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import { setMovies, setUser } from '../../actions/actions';
+
+import MoviesList from '../movies-list/movies-list';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
+import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
-import {
-    Navbar,
-    Nav,
-    NavDropdown,
-    Spinner
-} from 'react-bootstrap';
+import { ProfileUpdate } from '../profile-update/profile-update';
+
+import { Link } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
 import './main-view.scss';
-import { setMovies, setUser } from '../../actions/actions';
-import MoviesList from '../movies-list/movies-list';
-export class MainView extends Component {
-    constructor(props) {
-        // Call the superclass constructor
-        // so React can initialize it
-        super(props);
-        // Initialize the state to an empty object so we can destructure it later
-        this.state = {
-            user: null,
-            isRegister: null,
-            isLoading: false,
-        };
+
+export class MainView extends React.Component {
+
+    constructor() {
+        super();
+
+        /* this.state = {
+             movies: [],
+             user: null 
+      }; */
     }
-    // One of the "hooks" available in a React Component
+
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
         if (accessToken !== null) {
-            this.setState({
-                user: localStorage.getItem('user'),
-            });
-            this.getUserData(accessToken);
+            /* this.setState({
+               user: localStorage.getItem('user'),
+             }); */
+            this.props.setUser(localStorage.getItem('user'));
             this.getMovies(accessToken);
         }
     }
 
+    onLoggedIn(authData) {
+        console.log(authData);
+        //this.setState({
+        //user: authData.user.Username
+        //});
+        this.props.setUser(authData.user.Username);
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        this.getMovies(authData.token);
+    }
+
     getMovies(token) {
-        this.setState({
-            isLoading: true,
-        })
         axios.get('https://oldmyflix-api.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
+                // the redux code being implemented
                 this.props.setMovies(response.data);
-                this.setState({
-                    isLoading: false,
-                })
             })
             .catch(function (error) {
                 console.log(error);
             });
     }
 
-    getUserData(token) {
-        axios.get('https://oldmyflix-api.herokuapp.com/users/' + localStorage.getItem('user'), {
-            headers: { Authorization: `Bearer ${token}` }
-        })
-            .then(response => {
-                this.props.setUser(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    onLoggedIn(authData) {
-        this.setState({
-            user: authData.user.Username,
-        });
-        localStorage.setItem('token', authData.token);
-        localStorage.setItem('user', authData.user.Username);
-        this.props.setUser(authData.user);
-        this.getMovies(authData.token);
-    }
-
-    onLoggedOut() {
+    onLogOut() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        this.state = {
-            user: null,
-        };
-        this.props.setMovies([]);
-        this.props.setUser({
-            Email: null,
-            Birthday: null,
-            FavoriteMovies: []
-        });
         window.open('/client', '_self');
     }
 
-    onRegisterClick() {
-        this.setState({
-            isRegister: true
-        });
-    }
-
-    onRegister(user, password) {
-        axios.post('https://oldmyflix-api.herokuapp.com/login', {
-            Username: user,
-            Password: password
-        })
-            .then(response => {
-                const data = response.data;
-                this.onLoggedIn(data);
-                this.setState({
-                    isRegister: false
-                });
-                window.open('/client', '_self');
-            })
-            .catch(e => {
-                console.log('No such user')
-            });
-    }
-
-    onDegister() {
-        this.setState({
-            isLoading: true,
-        })
-        axios.delete('https://oldmyflix-api.herokuapp.com/users/' + localStorage.getItem('user'))
-            .then(response => {
-                const data = response.data;
-                this.onLoggedOut()
-                this.setState({
-                    isLoading: false,
-                })
-            })
-            .catch(e => {
-                console.log('Error deregistering')
-            });
-    }
-
-    onAddToFavorites(movieId) {
-        let accessToken = localStorage.getItem('token');
-        if (accessToken) {
-            axios.post(`https://oldmyflix-api.herokuapp.com/users/${this.state.user}/movies/favorites/${movieId}`, {
-                headers: { Authorization: `Bearer ${accessToken}` }
-            })
-                .then(response => {
-                    this.props.setUser(response.data);
-                })
-                .catch(e => {
-                    console.log('No such user')
-                });
-        }
-    }
-
-    onRemoveFromFavorites(movieId) {
-        let accessToken = localStorage.getItem('token');
-        if (accessToken) {
-            axios.delete(`https://oldmyflix-api.herokuapp.com/users/${this.state.user}/movies/favorites/${movieId}`, {
-                headers: { Authorization: `Bearer ${accessToken}` }
-            })
-                .then(response => {
-                    this.props.setUser(response.data);
-                })
-                .catch(e => {
-                    console.log('No such user')
-                });
-        }
-    }
-
-    onProfileUpdate(user, password, email, birthday) {
-        let accessToken = localStorage.getItem('token');
-        if (accessToken) {
-            axios.put(`https://oldmyflix-api.herokuapp.com/users/${this.state.user}`, {
-                Username: user,
-                Password: password,
-                Email: email,
-                Birthday: birthday,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            })
-                .then(response => {
-                    const data = response.data
-                    this.props.setUser(data);
-                    this.setState({
-                        user: data.Username,
-                    });
-                    localStorage.setItem('user', data.Username);
-                    window.open('/client', '_self');
-                })
-                .catch(e => {
-                    console.log('Error updating profile - ', e)
-                });
-        }
-    }
-
     render() {
-        console.log("====this===props", this.props)
-        const { movies, userData, visibilityFilter } = this.props;
-        const { user, isRegister, isLoading } = this.state;
-        //const filteredFavoriteMovies = [...new Set(userData.FavoriteMovies)]
-        //const favoriteMovies = movies.filter(movie => filteredFavoriteMovies.includes(movie._id))
-        // add if condition and check if isRegister is true and return RegisterView component
-        if (isRegister) return (
-            <RegistrationView onRegister={(user, password) => this.onRegister(user, password)} />
-        )
+        // if state not initialized this will throw on runtime
+        // before the data is initially loaded
 
-        // Before the movies have been loaded
+        // now updated for Redux 
+        let { movies, user } = this.props;
+
+        // before the movies have loaded
         if (!movies) return <div className="main-view" />;
 
-        return (
-            <Router basename="/client">
-                <div className="main-view">
-                    <Navbar bg="dark" variant="dark" className="header" fixed="top">
-                        <Navbar.Brand href="/client">MyFlix</Navbar.Brand>
-                        <Nav className="mr-auto" />
-                        {!user && (<Nav>
-                            <Nav.Link href="/client/register">Sign Up</Nav.Link>
-                            <Nav.Link href="/client">Login</Nav.Link>
-                        </Nav>)}
-                        {
-                            user && (
-                                <React.Fragment>
-                                    <Nav>
-                                        <Nav.Link href="/client">Home</Nav.Link>
-                                    </Nav>
-                                    <Nav>
-                                        <Nav.Link href="/client/movies/favorites">My Favorites</Nav.Link>
-                                    </Nav>
-                                    <NavDropdown title={user}>
-                                        <NavDropdown.Item href="/client/profile">Update Profile</NavDropdown.Item>
-                                        <NavDropdown.Item onClick={() => this.onDegister()}>Deregister</NavDropdown.Item>
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item onClick={() => this.onLoggedOut()}>LogOut</NavDropdown.Item>
-                                    </NavDropdown>
-                                </React.Fragment>
-                            )
-                        }
+        if (!user) {
+            return (
+                <Router basename="/client">
+                    <div className="main-view">
+                        <Container>
+                            <Route exact path="/" render={() => <LoginView onLoggedIn={user => this.onLoggedIn(user)} />} />
+                            <Route exact path="/register" render={() => <RegistrationView />} />
+                        </Container>
+                    </div>
+                </Router>
+            );
+        } else {
+            return (
+                <Router basename="/client">
+                    <Navbar collapseOnSelect expand="lg" bg="custom" variant="dark" className="fixed-top navbar-main">
+                        <Navbar.Brand as={Link} to="/" className="navbar-brand">SuperFlix!</Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="mr-auto">
+                                <Nav.Link as={Link} to="/" className="navbar-link">Home</Nav.Link>
+                                <Nav.Link as={Link} to="/users/:userId" className="navbar-link">Profile</Nav.Link>
+                                <Nav.Link href="https://mmmenges.github.io/portfolio-website" target="_blank" className="navbar-link">Developer Portfolio</Nav.Link>
+                            </Nav>
+                            <Button onClick={this.onLogOut} variant="dark" type="submit" className="button log-out-button"> Log Out</Button>
+                        </Navbar.Collapse>
                     </Navbar>
-                    <Route exact path="/" render={() => {
-                        if (!user) return (
-                            <div className="main-view" style={{ margin: '20px' }}>
-                                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                            </div>
-                        );
-                        return (
-                            isLoading ? (
-                                <div className="loading-spinner">https://oldmyflix-api.herokuapp.com
-                                    <Spinner animation="border" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </Spinner>
-                                </div>
-                            ) : <MoviesList
-                                    moviesToShow={movies}
-                                    favoriteMovies={filteredFavoriteMovies}
-                                    removeFromFavorites={(movieId) => this.onRemoveFromFavorites(movieId)}
-                                    addToFavorites={(movieId) => this.onAddToFavorites(movieId)}
-                                    visibilityFilter={visibilityFilter}
-                                />
-                        )
-                    }
-                    } />
-                    <Route path="/register" render={() => <RegistrationView onRegister={(user, password) => this.onRegister(user, password)} />} />
-                    <Route
-                        path="/movies/:movieId"
-                        strict
-                        sensitive
-                        render={
-                            ({ match }) =>
-                                movies && match.params.movieId !== 'favorites' && <MovieView movie={movies.find(m => m._id === match.params.movieId)} removeFromFavorites={(movieId) => this.onRemoveFromFavorites(movieId)} addToFavorites={(movieId) => this.onAddToFavorites(movieId)} isFavorite={filteredFavoriteMovies && filteredFavoriteMovies.includes(match.params.movieId)} />}
-                    />
-                    <Route
-                        path="/movies/favorites"
-                        strict
-                        sensitive
-                        render={() => <MoviesList
-                            moviesToShow={favoriteMovies}
-                            favoriteMovies={filteredFavoriteMovies}
-                            removeFromFavorites={(movieId) => this.onRemoveFromFavorites(movieId)}
-                            visibilityFilter={visibilityFilter}
-                        />} />
-                    <Route path="/director/:name" render={({ match }) => <DirectorView directorName={match.params.name} />} />
-                    <Route path="/genre/:name" render={({ match }) => <GenreView genreName={match.params.name} />} />
-                    <Route path="/profile" render={
-                        () =>
-                            user && userData.Email && userData.Birthday && <ProfileView
-                                username={user}
-                                email={userData.Email}
-                                birthday={userData.Birthday.split('T')[0]}
-                                onProfileUpdate={(user, password, email, birthday) => this.onProfileUpdate(user, password, email, birthday)} />} />
-                </div>
-            </Router>
-        );
+                    <div className="main-view">
+                        <Route exact path="/" render={() => <MoviesList movies={movies} />} />
+                        <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+                        <Route path="/directors/:name" render={({ match }) => {
+                            if (!movies || movies.length === 0) return <div className="main-view" />;
+                            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
+                        }} />
+                        <Route path="/genres/:name" render={({ match }) => {
+                            if (!movies || movies.length === 0) return <div className="main-view" />;
+                            return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />
+                        }} />
+                        <Route path="/users/:userId" render={() => <ProfileView movies={movies} />} />
+                        <Route path="/users/:userId/update" render={() => <ProfileUpdate movies={movies} />} />
+                    </div>
+                </Router>
+            );
+        }
     }
 }
-
-MainView.propTypes = {
-    movies: PropTypes.array,
-    userData: PropTypes.shape({
-        Username: PropTypes.string,
-        Email: PropTypes.string,
-        Birthday: PropTypes.string,
-        FavoriteMovies: PropTypes.array,
-    }),
-    visibilityFilter: PropTypes.string
+let mapStateToProps = (state) => {
+    return { movies: state.movies, user: state.user };
 };
-
-let mapStateToProps = state => {
-    return {
-        movies: state.movies,
-        userData: state.user,
-        visibilityFilter: state.visibilityFilter,
-    }
-}
-
 export default connect(mapStateToProps, { setMovies, setUser })(MainView);
