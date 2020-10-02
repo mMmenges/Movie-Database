@@ -26,17 +26,19 @@ import './main-view.scss';
 
 export class MainView extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
-        /* this.state = {
+        this.state = {
              movies: [],
              user: null 
-      }; */
+      }; 
     }
 
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
+        console.log("component did mount ran")
+        console.log(accessToken)
         if (accessToken !== null) {
             /* this.setState({
                user: localStorage.getItem('user'),
@@ -58,6 +60,7 @@ export class MainView extends React.Component {
     }
 
     getMovies(token) {
+        console.log("token", token)
         axios.get('https://oldmyflix-api.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}` }
         })
@@ -79,16 +82,17 @@ export class MainView extends React.Component {
     render() {
         // if state not initialized this will throw on runtime
         // before the data is initially loaded
-
+        console.log('state', this.state)
+        console.log('props', this.props)
         // now updated for Redux 
-        let { movies, user } = this.props;
+        let { movies, user } = this.state;
 
         // before the movies have loaded
         if (!movies) return <div className="main-view" />;
 
         if (!user) {
             return (
-                <Router basename="/client">
+                <Router>
                     <div className="main-view">
                         <Container>
                             <Route exact path="/" render={() => <LoginView onLoggedIn={user => this.onLoggedIn(user)} />} />

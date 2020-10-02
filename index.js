@@ -12,34 +12,33 @@ const Users = Models.User;
 const app = express();
 
 app.use(express.static('public'));
-app.use('/client', express.static(path.join(__dirname, 'client', 'dist')));
 
-app.get('client/*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
+
 
 const cors = require('cors');
-// app.use(cors());
-
+app.use(cors());
+/*
+Ebere fix this later
 // this restricts the origins allowed in the list below
-let allowedOrigins = [
-    'http://localhost:1234',
-    'http://localhost:50506',
-    'http://localhost:8080',
-    'https://oldmyflix-api.herokuapp.com',
-    '*'
-];
+// let allowedOrigins = [
+//     'http://localhost:1234',
+//     'http://localhost:50506',
+//     'http://localhost:8080',
+//     'https://oldmyflix-api.herokuapp.com',
+//     '*'
+// ];
 
-app.use(cors({
-    origin: (origin, callback) => {
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1) { // If a specific origin isn't found on the list of allowed origins
-            let message = 'The CORS policy for this application doesn\'t allow access from origin ' + origin;
-            return callback(new Error(message), false);
-        }
-        return callback(null, true);
-    }
-}));
+// app.use(cors({
+//     origin: (origin, callback) => {
+//         if (!origin) return callback(null, true);
+//         if (allowedOrigins.indexOf(origin) !== -1) { // If a specific origin isn't found on the list of allowed origins
+//             let message = 'The CORS policy for this application doesn\'t allow access from origin ' + origin;
+//             return callback(new Error(message), false);
+//         }
+//         return callback(null, true);
+//     }
+// }));
+*/
 
 const passport = require('passport');
 require('./passport');
@@ -49,10 +48,14 @@ const { check, validationResult } = require('express-validator');
 
 
 //mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect(process.env.CONNECTION_URI, () => {}, { useNewUrlParser: true })
-    .catch(err => {
-        console.log(err);
-    });
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
+    if (err) {
+        throw err
+    }
+
+    console.log('connected to mongodb!')
+})
+
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
@@ -64,12 +67,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to Michaels movie data base!');
 });
 
-// Documentation
-app.get('/documentation', (req, res) => {
-    res.sendFile('public/documentation.html', {
-        root: __dirname
-    });
-});
+
 
 
 //gets the full list of movies
@@ -277,7 +275,13 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
         });
 });
 
-app.use(express.static('public'));
+
+//client app is here
+app.use(express.static(path.join(__dirname, 'client', 'dist')));
+app.get('/clients*', (req, res) => {
+    console.log('ok')
+    res.sendFile(path.join(__dirname + '/client/dist/index.html'));
+});
 
 // this is the app listening to the server
 const port = process.env.PORT || 8080;

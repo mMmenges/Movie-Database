@@ -41953,25 +41953,20 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(MainView);
 
-  function MainView(props) {
-    var _this;
-
+  function MainView() {
     _classCallCheck(this, MainView);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      movies: [],
-      user: null
-    };
-    return _this;
+    return _super.call(this);
+    /* this.state = {
+         movies: [],
+         user: null 
+    }; */
   }
 
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var accessToken = localStorage.getItem('token');
-      console.log("component did mount ran");
-      console.log(accessToken);
 
       if (accessToken !== null) {
         /* this.setState({
@@ -41996,9 +41991,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "getMovies",
     value: function getMovies(token) {
-      var _this2 = this;
-
-      console.log("token", token);
+      var _this = this;
 
       _axios.default.get('https://oldmyflix-api.herokuapp.com/movies', {
         headers: {
@@ -42006,7 +41999,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         }
       }).then(function (response) {
         // the redux code being implemented
-        _this2.props.setMovies(response.data);
+        _this.props.setMovies(response.data);
       }).catch(function (error) {
         console.log(error);
       });
@@ -42021,23 +42014,23 @@ var MainView = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this2 = this;
 
       // if state not initialized this will throw on runtime
       // before the data is initially loaded
-      console.log('state', this.state);
-      console.log('props', this.props); // now updated for Redux 
-
-      var _this$state = this.state,
-          movies = _this$state.movies,
-          user = _this$state.user; // before the movies have loaded
+      // now updated for Redux 
+      var _this$props = this.props,
+          movies = _this$props.movies,
+          user = _this$props.user; // before the movies have loaded
 
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
 
       if (!user) {
-        return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
+        return _react.default.createElement(_reactRouterDom.BrowserRouter, {
+          basename: "/client"
+        }, _react.default.createElement("div", {
           className: "main-view"
         }, _react.default.createElement(_Container.default, null, _react.default.createElement(_reactRouterDom.Route, {
           exact: true,
@@ -42045,7 +42038,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           render: function render() {
             return _react.default.createElement(_loginView.LoginView, {
               onLoggedIn: function onLoggedIn(user) {
-                return _this3.onLoggedIn(user);
+                return _this2.onLoggedIn(user);
               }
             });
           }
@@ -42242,7 +42235,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -42516,5 +42509,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
-//# sourceMappingURL=/src.78399e21.js.map
+},{}]},{},["../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+//# sourceMappingURL=/src.e31bb0bc.js.map
