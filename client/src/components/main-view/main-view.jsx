@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { connect } from 'react-redux';
 
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { setMovies, setUser } from '../../actions/actions';
 
@@ -11,13 +11,15 @@ import MoviesList from '../movies-list/movies-list';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieView } from '../movie-view/movie-view';
+import { MovieCard} from '../movie-card/movie-card';
+import { MoviesView } from "../movies-view/movies-view"
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
 import { ProfileUpdate } from '../profile-update/profile-update';
 
 import { Link } from 'react-router-dom';
-import Container from 'react-bootstrap/Container';
+import { Row,Container} from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -38,35 +40,39 @@ export class MainView extends React.Component {
     componentDidMount() {
         let accessToken = localStorage.getItem('token');
         console.log("component did mount ran")
-        console.log(accessToken)
+        // console.log(accessToken)
         if (accessToken !== null) {
-            /* this.setState({
+            this.setState({
                user: localStorage.getItem('user'),
-             }); */
-            this.props.setUser(localStorage.getItem('user'));
+             }); 
+            // this.props.setUser(localStorage.getItem('user'));
             this.getMovies(accessToken);
         }
     }
 
     onLoggedIn(authData) {
         console.log(authData);
-        //this.setState({
-        //user: authData.user.Username
-        //});
-        this.props.setUser(authData.user.Username);
+        this.setState({
+            user: authData.user.Username
+        });
+        // this.props.setUser(authData.user.Username);
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.Username);
         this.getMovies(authData.token);
     }
 
     getMovies(token) {
-        console.log("token", token)
+        // console.log("token", token)
         axios.get('https://oldmyflix-api.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(response => {
+                console.log(response.data)
+                this.setState({
+                    movies: response.data
+                })
                 // the redux code being implemented
-                this.props.setMovies(response.data);
+                // this.props.setMovies(response.data);
             })
             .catch(function (error) {
                 console.log(error);
@@ -103,7 +109,7 @@ export class MainView extends React.Component {
             );
         } else {
             return (
-                <Router basename="/client">
+                <Router>
                     <Navbar collapseOnSelect expand="lg" bg="custom" variant="dark" className="fixed-top navbar-main">
                         <Navbar.Brand as={Link} to="/" className="navbar-brand">SuperFlix!</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -117,7 +123,16 @@ export class MainView extends React.Component {
                         </Navbar.Collapse>
                     </Navbar>
                     <div className="main-view">
-                        <Route exact path="/" render={() => <MoviesList movies={movies} />} />
+                        <Switch>
+                        {/* <Route exact path="/" render={() => <MoviesList movies={movies} />} /> */}
+                        <Route exact path="/" render={() => {
+                        return (<Row> {movies.map((m) => <MovieCard  key={m._id} movie={m} />)} </Row>)
+
+                        }}/> 
+                                                
+
+                        
+
                         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
                         <Route path="/directors/:name" render={({ match }) => {
                             if (!movies || movies.length === 0) return <div className="main-view" />;
@@ -129,6 +144,7 @@ export class MainView extends React.Component {
                         }} />
                         <Route path="/users/:userId" render={() => <ProfileView movies={movies} />} />
                         <Route path="/users/:userId/update" render={() => <ProfileUpdate movies={movies} />} />
+                        </Switch>
                     </div>
                 </Router>
             );

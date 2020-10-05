@@ -4,8 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 export class MovieCard extends React.Component {
+    constructor(){
+        super()
+        this.state ={ isFavourite : false }
+    }
     render() {
         const { movie, addToFavourite, removeFromFavourites } = this.props;
+        const { isFavourite } = this.state;
         const buttonText = isFavourite ? 'Remove fromFavourites' : 'Add to Favourites'
         return (
             <Card style={{ minWidth: '20rem', maxWidth: '20rem', marginBottom: '20px' }}>
@@ -33,9 +38,9 @@ MovieCard.propTypes = {
     movie: PropTypes.shape({
         Title: PropTypes.string.isRequired,
         Description: PropTypes.string.isRequired,
-        ImagePath: PropTypes.string.isRequired
+        // ImagePath: PropTypes.string.isRequired
     }).isRequired,
     addToFavourites: PropTypes.func,
-    isFavourite: PropTypes.bool.isRequired,
+    // isFavourite: PropTypes.bool.isRequired,
     removeFromFavourites: PropTypes.func,
 };

@@ -15,7 +15,7 @@ export function RegistrationView(props) {
     const handleRegister = (e) => {
         e.preventDefault();
         axios
-            .post('https://oldmyflix-api.herokuapp.com/login', {
+            .post('https://oldmyflix-api.herokuapp.com/users', {
                 Username: username,
                 Password: password,
                 Email: email,
@@ -27,12 +27,13 @@ export function RegistrationView(props) {
                 window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
             })
             .catch((e) => {
+                console.log(e)
                 console.log('error registering the user');
             });
     };
 
     return (
-        <Form className="registerForm">
+        <Form className="registerForm" onSubmit={handleRegister}>
             <Form.Row className="align-items-center">
                 <Col xs sm={6} className="registerFormContent">
                     <Form.Group>
@@ -51,7 +52,7 @@ export function RegistrationView(props) {
                         <Form.Label>Date of Birth:</Form.Label>
                         <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={handleSubmit}>
+                    <Button variant="primary" type="submit">
                         Submit
           </Button>
                 </Col>
@@ -60,6 +61,6 @@ export function RegistrationView(props) {
     )
 }
 
-RegistrationView.propTypes = {
-    onRegister: PropTypes.func.isRequired
-};
+// RegistrationView.propTypes = {
+//     onRegister: PropTypes.func.isRequired
+// };

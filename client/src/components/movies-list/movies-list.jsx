@@ -12,7 +12,7 @@ const mapStateToProps = state => {
 };
 
 function MoviesList(props) {
-    console.log(props)
+    console.log("movie props:",props)
     const { moviesToShow, favouriteMovies, visibilityFilter, removeFromFavourites, addToFavourites } = props;
     let filteredMovies = moviesToShow;
     if (!moviesToShow) return <div className="main-view" />;
@@ -45,12 +45,12 @@ function MoviesList(props) {
     </div >;
 }
 
-MoviesList.propTypes = {
-    moviesToShow: PropTypes.array.isRequired,
-    visibilityFilter: PropTypes.string.isRequired,
-    removeFromFavourites: PropTypes.func.isRequired,
-    addToFavourites: PropTypes.func,
-    favouriteMovies: PropTypes.array.isRequired,
-};
+// MoviesList.propTypes = {
+//     moviesToShow: PropTypes.array.isRequired,
+//     visibilityFilter: PropTypes.string.isRequired,
+//     removeFromFavourites: PropTypes.func.isRequired,
+//     addToFavourites: PropTypes.func,
+//     favouriteMovies: PropTypes.array.isRequired,
+// };
 
 export default connect(mapStateToProps)(MoviesList);
