@@ -1,3 +1,27 @@
-.genreContent {
-    margin: 100px;
+$primarycolor: #ffffff;
+$secondarycolor: #000000;
+$tertiarycolor: 330C61;
+.genre-view-container {
+    margin-top: 8em;
+}
+
+.genre-card {
+    margin: 0 auto;
+}
+
+.genre-name {
+    font-family: 'Bangers', cursive;
+    font-size: 3em;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+}
+
+.genre-view-back {
+    float: right;
+}
+
+@media all and (max-width: 800px) {
+    .genre-card {
+        max-width: 90%;
+    }
 }

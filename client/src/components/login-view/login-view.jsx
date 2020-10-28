@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import './login-view.scss';
+import login from './login.jpg'
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
@@ -27,7 +28,11 @@ export function LoginView(props) {
     };
 
     return (
-        <Form className="loginForm">
+        <div className="login-view" style={{ backgroundImage: `url(${login})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+        <div className="app-title">
+          <h1>myFlix!</h1>
+        </div>
+        <Form className="login-form">
             <Form.Row className="align-items-center">
                 <Col xs sm={6} className="loginFormContent">
                     <Form.Group>
@@ -49,6 +54,7 @@ export function LoginView(props) {
                 </Col>
             </Form.Row>
         </Form>
+        </div>
     );
 }
 

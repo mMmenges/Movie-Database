@@ -36839,10 +36839,10 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           movie = _this$props.movie,
-          addToFavourites = _this$props.addToFavourites,
-          isFavourite = _this$props.isFavourite,
-          removeFromFavourites = _this$props.removeFromFavourites;
-      var buttonText = isFavourite ? 'Remove from Favourites' : 'Add to Favourites';
+          addToFavorites = _this$props.addToFavorites,
+          isFavorite = _this$props.isFavorite,
+          removeFromFavorites = _this$props.removeFromFavorites;
+      var buttonText = isFavorite ? 'Remove from Favorites' : 'Add to Favorites';
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
@@ -36882,7 +36882,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, movie.Director.Name))), _react.default.createElement(_Button.default, {
         variant: "link",
         onClick: function onClick() {
-          return isFavourite ? removeFromFavourites(movie._id) : addToFavourites(movie._id);
+          return isFavorite ? removeFromFavorites(movie._id) : addToFavorites(movie._id);
         }
       }, buttonText), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
@@ -36902,9 +36902,9 @@ MovieView.propTypes = {
     Description: _propTypes.default.string,
     Genre: _propTypes.default.object
   }).isRequired,
-  addToFavourites: _propTypes.default.func,
-  isFavourite: _propTypes.default.bool.isRequired,
-  removeFromFavourites: _propTypes.default.func
+  addToFavorites: _propTypes.default.func,
+  isFavorite: _propTypes.default.bool.isRequired,
+  removeFromFavorites: _propTypes.default.func
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"../node_modules/prop-types-extra/lib/utils/createChainableTypeChecker.js":[function(require,module,exports) {
 'use strict';
@@ -52233,7 +52233,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       this.props.setUser({
         Email: null,
         Birthday: null,
-        FavouriteMovies: []
+        FavoriteMovies: []
       });
       window.open('/client', '_self');
     }
@@ -52288,8 +52288,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
-    key: "onAddToFavourites",
-    value: function onAddToFavourites(movieId) {
+    key: "onAddToFavorites",
+    value: function onAddToFavorites(movieId) {
       var _this6 = this;
 
       var accessToken = localStorage.getItem('token');
@@ -52307,8 +52307,8 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
-    key: "onRemoveFromFavourites",
-    value: function onRemoveFromFavourites(movieId) {
+    key: "onRemoveFromFavorites",
+    value: function onRemoveFromFavorites(movieId) {
       var _this7 = this;
 
       var accessToken = localStorage.getItem('token');
@@ -52374,7 +52374,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
 
       var filteredFavoriteMovies = _toConsumableArray(new Set(userData.FavoriteMovies));
 
-      var favouriteMovies = movies.filter(function (movie) {
+      var favoriteMovies = movies.filter(function (movie) {
         return filteredFavoriteMovies.includes(movie._id);
       }); // add if condition and check if isRegister is true and return RegisterView component
 
@@ -52407,7 +52407,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
       }, "Login")), user && _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_reactBootstrap.Nav, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
         href: "/client"
       }, "Home")), _react.default.createElement(_reactBootstrap.Nav, null, _react.default.createElement(_reactBootstrap.Nav.Link, {
-        href: "/client/movies/favourites"
+        href: "/client/movies/favorites"
       }, "My Favorites")), _react.default.createElement(_reactBootstrap.NavDropdown, {
         title: user
       }, _react.default.createElement(_reactBootstrap.NavDropdown.Item, {
@@ -52443,12 +52443,12 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             className: "sr-only"
           }, "Loading..."))) : _react.default.createElement(_moviesList.default, {
             moviesToShow: movies,
-            favouriteMovies: filteredFavoriteMovies,
-            removeFromFavourites: function removeFromFavourites(movieId) {
-              return _this9.onRemoveFromFavourites(movieId);
+            favoriteMovies: filteredFavoriteMovies,
+            removeFromFavorites: function removeFromFavorites(movieId) {
+              return _this9.onRemoveFromFavorites(movieId);
             },
-            addToFavourites: function addToFavourites(movieId) {
-              return _this9.onAddToFavourites(movieId);
+            addToFavorites: function addToFavorites(movieId) {
+              return _this9.onAddToFavorites(movieId);
             },
             visibilityFilter: visibilityFilter
           });
@@ -52468,29 +52468,29 @@ var MainView = /*#__PURE__*/function (_React$Component) {
         sensitive: true,
         render: function render(_ref) {
           var match = _ref.match;
-          return movies && match.params.movieId !== 'favourites' && _react.default.createElement(_movieView.MovieView, {
+          return movies && match.params.movieId !== 'favorites' && _react.default.createElement(_movieView.MovieView, {
             movie: movies.find(function (m) {
               return m._id === match.params.movieId;
             }),
-            removeFromFavourites: function removeFromFavourites(movieId) {
-              return _this9.onRemoveFromFavourites(movieId);
+            removeFromFavorites: function removeFromFavorites(movieId) {
+              return _this9.onRemoveFromFavorites(movieId);
             },
-            addToFavourites: function addToFavourites(movieId) {
-              return _this9.onAddToFavourites(movieId);
+            addToFavorites: function addToFavorites(movieId) {
+              return _this9.onAddToFavorites(movieId);
             },
-            isFavourite: filteredFavoriteMovies && filteredFavoriteMovies.includes(match.params.movieId)
+            isFavorite: filteredFavoriteMovies && filteredFavoriteMovies.includes(match.params.movieId)
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/movies/favourites",
+        path: "/movies/favorites",
         strict: true,
         sensitive: true,
         render: function render() {
           return _react.default.createElement(_moviesList.default, {
-            moviesToShow: favouriteMovies,
-            favouriteMovies: filteredFavoriteMovies,
-            removeFromFavourites: function removeFromFavourites(movieId) {
-              return _this9.onRemoveFromFavourites(movieId);
+            moviesToShow: favoriteMovies,
+            favoriteMovies: filteredFavoriteMovies,
+            removeFromFavorites: function removeFromFavorites(movieId) {
+              return _this9.onRemoveFromFavorites(movieId);
             },
             visibilityFilter: visibilityFilter
           });
@@ -52598,7 +52598,7 @@ function user() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     Email: null,
     Birthday: null,
-    FavouriteMovies: []
+    FavoriteMovies: []
   };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 

@@ -11,8 +11,8 @@ import MoviesList from '../movies-list/movies-list';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieView } from '../movie-view/movie-view';
-import { MovieCard} from '../movie-card/movie-card';
-import { MoviesView } from "../movies-view/movies-view"
+// import { MovieCard} from '../movie-card/movie-card';
+// import { MoviesView } from "../movies-view/movies-view";
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
@@ -25,6 +25,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import './main-view.scss';
+
 
 export class MainView extends React.Component {
 
@@ -109,15 +110,15 @@ export class MainView extends React.Component {
             );
         } else {
             return (
-                <Router>
+                <Router basename="/client">
                     <Navbar collapseOnSelect expand="lg" bg="custom" variant="dark" className="fixed-top navbar-main">
-                        <Navbar.Brand as={Link} to="/" className="navbar-brand">SuperFlix!</Navbar.Brand>
+                        <Navbar.Brand as={Link} to="/" className="navbar-brand"></Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
                                 <Nav.Link as={Link} to="/" className="navbar-link">Home</Nav.Link>
                                 <Nav.Link as={Link} to="/users/:userId" className="navbar-link">Profile</Nav.Link>
-                                <Nav.Link href="https://mmmenges.github.io/portfolio-website" target="_blank" className="navbar-link">Developer Portfolio</Nav.Link>
+                                <Nav.Link href="https://mmmenges.github.io/portfolio-website" target="_blank" className="navbar-link">My Portfolio</Nav.Link>
                             </Nav>
                             <Button onClick={this.onLogOut} variant="dark" type="submit" className="button log-out-button"> Log Out</Button>
                         </Navbar.Collapse>

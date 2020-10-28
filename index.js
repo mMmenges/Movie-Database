@@ -24,7 +24,6 @@ Ebere fix this later
 //     'http://localhost:1234',
 //     'http://localhost:50506',
 //     'http://localhost:8080',
-//     'https://oldmyflix-api.herokuapp.com',
 //     '*'
 // ];
 

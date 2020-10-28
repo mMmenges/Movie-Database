@@ -1,33 +1,59 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Badge from 'react-bootstrap/Badge';
-import axios from 'axios';
+
+import { Link } from "react-router-dom";
+
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import './genre-view.scss';
 
-export function GenreView(props) {
-    const [genre, setGenre] = useState(null);
+export class GenreView extends React.Component {
 
-    useEffect(() => {
-        axios.get('https://oldmyflix-api.herokuapp.com//movies/genre/' + props.genreName)
-            .then(response => {
-                setGenre(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }, []);
+  constructor() {
+    super();
 
-    if (!genre) return null
+    this.state = {};
+  }
+
+  onLogOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.open('/client', '_self');
+  }
+
+  render() {
+    const { genre } = this.props;
+
+    if (!genre) return <div className="main-view" />;
 
     return (
-        <div className="genreContent">
-            <Badge variant="primary">Genre</Badge>{' - ' + genre.Name}
-            <br />
-            <Badge variant="primary">Description</Badge>{' - ' + genre.Description}
-        </div>
+      <div>
+        <Container className="genre-view-container">
+          <Card style={{ width: '45rem' }} className="genre-card">
+            <Card.Img variant="top" src={genre.Img} style={{ maxHeight: 400 }} />
+            <Card.Body>
+              <Card.Title className="genre-name">{genre.Name}</Card.Title>
+              <Card.Text>{genre.Description}</Card.Text>
+              <Link to={"/"}>
+                <Button variant="link" className="button genre-view-back">Back</Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </Container>
+        <footer>
+            <p> Created and Design by Michael Menges. </p>
+            <p> Director information from Wikipedia. Pictures from UnSplash </p>
+        </footer>        
+    </div> 
     );
+  }
 }
 
 GenreView.propTypes = {
-    genreName: PropTypes.string.isRequired
-};
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+      Description: PropTypes.string.isRequired,
+      Img: PropTypes.string.isRequired
+    })
+  };

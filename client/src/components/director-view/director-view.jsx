@@ -1,35 +1,57 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import Badge from 'react-bootstrap/Badge';
-import axios from 'axios';
+
+import { Link } from "react-router-dom";
+
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
 import './director-view.scss';
+import DirectorImage from './director.jpg'
 
-export function DirectorView(props) {
-    const [director, setDirector] = useState(null);
+export class DirectorView extends React.Component {
 
-    useEffect(() => {
-        axios.get('https://oldmyflix-api.herokuapp.com/movies/director/movies/director/' + props.directorName)
-            .then(response => {
-                setDirector(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }, []);
+  constructor() {
+    super();
+    this.state = {};
+  }
 
-    if (!director) return null
+  render() {
+    const { director } = this.props;
+
+    if (!director) return <div className="main-view" />;
 
     return (
-        <div className="directorContent">
-            <Badge variant="primary">Director</Badge>{' - ' + director.Name}
-            <br />
-            <Badge variant="primary">Bio</Badge>{' - ' + director.Bio}
-            <br />
-            <Badge variant="primary">Birth year</Badge>{' - ' + director.Birth}
-        </div>
+      <div>
+        <Container>
+          <div className="director-view-container">
+            <Card style={{ width: '45rem' }} className="director-card">
+              <Card.Img variant="top" src={DirectorImage} style={{ maxHeight: 400 }} />
+              <Card.Body>
+                <Card.Title className="director-name">{director.Name}</Card.Title>
+                <Card.Text>Born: {director.Birth}</Card.Text>
+                <Card.Text>Died: {director.Death}</Card.Text>
+                <Card.Text>{director.Bio}</Card.Text>
+              </Card.Body>
+              <Link to={"/"}>
+                <Button variant="link" className="button director-view-back">Back</Button>
+              </Link>
+            </Card>
+          </div>
+        </Container>
+        <footer>
+                    <p> Created and Design by Michael Menges. </p>
+                    <p> Director information from Wikipedia. Pictures from UnSplash </p>
+          </footer>
+      </div>
     );
+  }
 }
 
 DirectorView.propTypes = {
-    directorName: PropTypes.string.isRequired
+  Director: PropTypes.shape({
+    Name: PropTypes.string.isRequired,
+    Bio: PropTypes.string.isRequired,
+    Birth: PropTypes.string.isRequired
+  })
 };

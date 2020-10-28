@@ -38251,9 +38251,9 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           movie = _this$props.movie,
-          addToFavourite = _this$props.addToFavourite,
-          removeFromFavourites = _this$props.removeFromFavourites;
-      var buttonText = isFavourite ? 'Remove fromFavourites' : 'Add to Favourites';
+          addToFavorite = _this$props.addToFavorite,
+          removeFromFavorites = _this$props.removeFromFavorites;
+      var buttonText = isFavorite ? 'Remove fromFavorites' : 'Add to Favorites';
       return _react.default.createElement(_Card.default, {
         style: {
           minWidth: '20rem',
@@ -38281,7 +38281,7 @@ var MovieCard = /*#__PURE__*/function (_React$Component) {
       }, "Genre")), _react.default.createElement(_Button.default, {
         variant: "link",
         onClick: function onClick() {
-          return isFavourite ? removeFromFavourites(movie._id) : addToFavourites(movie._id);
+          return isFavorite ? removeFromFavorites(movie._id) : addToFavorites(movie._id);
         }
       })));
     }
@@ -38297,9 +38297,9 @@ MovieCard.propTypes = {
     Description: _propTypes.default.string.isRequired,
     ImagePath: _propTypes.default.string.isRequired
   }).isRequired,
-  addToFavourites: _propTypes.default.func,
-  isFavourite: _propTypes.default.bool.isRequired,
-  removeFromFavourites: _propTypes.default.func
+  addToFavorites: _propTypes.default.func,
+  isFavorite: _propTypes.default.bool.isRequired,
+  removeFromFavorites: _propTypes.default.func
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../node_modules/react-bootstrap/esm/Card.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/movies-list/movies-list.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -38338,10 +38338,10 @@ var mapStateToProps = function mapStateToProps(state) {
 function MoviesList(props) {
   console.log(props);
   var moviesToShow = props.moviesToShow,
-      favouriteMovies = props.favouriteMovies,
+      favoriteMovies = props.favoriteMovies,
       visibilityFilter = props.visibilityFilter,
-      _removeFromFavourites = props.removeFromFavourites,
-      _addToFavourites = props.addToFavourites;
+      _removeFromFavorites = props.removeFromFavorites,
+      _addToFavorites = props.addToFavorites;
   var filteredMovies = moviesToShow;
   if (!moviesToShow) return _react.default.createElement("div", {
     className: "main-view"
@@ -38355,7 +38355,7 @@ function MoviesList(props) {
 
   if (moviesToShow.length === 0) {
     return _react.default.createElement("h3", {
-      className: "empty-favourites"
+      className: "empty-favorites"
     }, "No Movies Found!");
   }
 
@@ -38373,12 +38373,12 @@ function MoviesList(props) {
     return _react.default.createElement(_movieCard.MovieCard, {
       key: m._id,
       movie: m,
-      removeFromFavourites: function removeFromFavourites(movieId) {
-        return _removeFromFavourites(movieId);
+      removeFromFavorites: function removeFromFavorites(movieId) {
+        return _removeFromFavorites(movieId);
       },
-      isFavourite: favouriteMovies && favouriteMovies.includes(m._id),
-      addToFavourites: function addToFavourites(movieId) {
-        return _addToFavourites(movieId);
+      isFavorite: favoriteMovies && favoriteMovies.includes(m._id),
+      addToFavorites: function addToFavorites(movieId) {
+        return _addToFavorites(movieId);
       }
     });
   })));
@@ -38387,9 +38387,9 @@ function MoviesList(props) {
 MoviesList.propTypes = {
   moviesToShow: _propTypes.default.array.isRequired,
   visibilityFilter: _propTypes.default.string.isRequired,
-  removeFromFavourites: _propTypes.default.func.isRequired,
-  addToFavourites: _propTypes.default.func,
-  favouriteMovies: _propTypes.default.array.isRequired
+  removeFromFavorites: _propTypes.default.func.isRequired,
+  addToFavorites: _propTypes.default.func,
+  favoriteMovies: _propTypes.default.array.isRequired
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps)(MoviesList);
@@ -38707,10 +38707,10 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           movie = _this$props.movie,
-          addToFavourites = _this$props.addToFavourites,
-          isFavourite = _this$props.isFavourite,
-          removeFromFavourites = _this$props.removeFromFavourites;
-      var buttonText = isFavourite ? 'Remove from Favourites' : 'Add to Favourites';
+          addToFavorites = _this$props.addToFavorites,
+          isFavorite = _this$props.isFavorite,
+          removeFromFavorites = _this$props.removeFromFavorites;
+      var buttonText = isFavorite ? 'Remove from Favorites' : 'Add to Favorites';
       if (!movie) return null;
       return _react.default.createElement("div", {
         className: "movie-view"
@@ -38750,7 +38750,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       }, movie.Director.Name))), _react.default.createElement(_Button.default, {
         variant: "link",
         onClick: function onClick() {
-          return isFavourite ? removeFromFavourites(movie._id) : addToFavourites(movie._id);
+          return isFavorite ? removeFromFavorites(movie._id) : addToFavorites(movie._id);
         }
       }, buttonText), _react.default.createElement(_reactRouterDom.Link, {
         to: '/'
@@ -38770,9 +38770,9 @@ MovieView.propTypes = {
     Description: _propTypes.default.string,
     Genre: _propTypes.default.object
   }).isRequired,
-  addToFavourites: _propTypes.default.func,
-  isFavourite: _propTypes.default.bool.isRequired,
-  removeFromFavourites: _propTypes.default.func
+  addToFavorites: _propTypes.default.func,
+  isFavorite: _propTypes.default.bool.isRequired,
+  removeFromFavorites: _propTypes.default.func
 };
 },{"react":"../node_modules/react/index.js","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","./movie-view.scss":"components/movie-view/movie-view.scss"}],"../node_modules/react-bootstrap/esm/Badge.js":[function(require,module,exports) {
 "use strict";
@@ -42062,7 +42062,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           as: _reactRouterDom.Link,
           to: "/",
           className: "navbar-brand"
-        }, "SuperFlix!"), _react.default.createElement(_Navbar.default.Toggle, {
+        }, "myFlix"), _react.default.createElement(_Navbar.default.Toggle, {
           "aria-controls": "basic-navbar-nav"
         }), _react.default.createElement(_Navbar.default.Collapse, {
           id: "basic-navbar-nav"
@@ -42210,7 +42210,7 @@ function user() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
     Email: null,
     Birthday: null,
-    FavourMovies: []
+    FavorMovies: []
   };
   var action = arguments.length > 1 ? arguments[1] : undefined;
 

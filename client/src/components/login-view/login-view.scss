@@ -1,7 +1,34 @@
-.loginForm {
-    margin-top: 150px;
+//.loginForm {
+//   margin-top: 150px;
+//}
+//.loginFormContent {
+//    margin: auto;
+//}
+$primarycolor: #ffffff;
+$secondarycolor: #000000;
+$tertiarycolor: #030c61;
+.login-view {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-left: 5em;
+    color: $primarycolor;
 }
 
-.loginFormContent {
-    margin: auto;
+.login-form {
+    margin: 0 auto;
+    text-align: left;
+    max-width: 500px;
+    padding: 50px;
+}
+
+login-item {
+    margin: 20px;
+}
+
+.button {
+    margin: 20px;
+    width: 150px;
 }

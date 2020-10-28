@@ -33,6 +33,7 @@ export function RegistrationView(props) {
     };
 
     return (
+        
         <Form className="registerForm" onSubmit={handleRegister}>
             <Form.Row className="align-items-center">
                 <Col xs sm={6} className="registerFormContent">
@@ -55,6 +56,9 @@ export function RegistrationView(props) {
                     <Button variant="primary" type="submit">
                         Submit
           </Button>
+          <br></br>
+          <br></br>
+          <p>We won't share your data with anyone else.</p>
                 </Col>
             </Form.Row>
         </Form>

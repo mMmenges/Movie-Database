@@ -1,56 +1,43 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 
+import { Link } from 'react-router-dom';
+
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import { MovieCard } from '../movie-card/movie-card';
-import './movies-list.scss';
+
+import Button from 'react-bootstrap/Button';
 
 const mapStateToProps = state => {
-    const { visibilityFilter } = state;
-    return { visibilityFilter };
+  const { visibilityFilter } = state;
+  return { visibilityFilter };
 };
 
-function MoviesList(props) {
-    console.log("movie props:",props)
-    const { moviesToShow, favouriteMovies, visibilityFilter, removeFromFavourites, addToFavourites } = props;
-    let filteredMovies = moviesToShow;
-    if (!moviesToShow) return <div className="main-view" />;
+const onLogOut = (e) => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  window.open('/client', '_self');
+};
 
-    if (visibilityFilter !== '') {
-        filteredMovies = moviesToShow.filter(m => m.Title.includes(visibilityFilter));
-    }
+export function MoviesList(props) {
+  const { movies, visibilityFilter } = props;
+  let filteredMovies = movies;
 
-    if (moviesToShow.length === 0) {
-        return <h3 className='empty-favourites'>No Movies Found!</h3>
-    }
+  if (visibilityFilter !== '') {
+    filteredMovies = movies.filter(m => m.Title.toLowerCase().includes(visibilityFilter.toLowerCase())
+      || m.Director.Name.toLowerCase().includes(visibilityFilter.toLowerCase())
+      || m.Genre.Name.toLowerCase().includes(visibilityFilter.toLowerCase()));
+  }
 
-    return <div className="movies-list">
-        <div className="movies-filter-wrapper">
-            <VisibilityFilterInput visibilityFilter={visibilityFilter} />
-        </div>
-        <div className="card-deck justify-content-center">
-            {filteredMovies.length === 0 && <h3 className='filter-empty-movies'>No Movies Found!</h3>}
-            {filteredMovies.map(
-                m =>
-                    <MovieCard
-                        key={m._id}
-                        movie={m}
-                        removeFromFavourites={(movieId) => removeFromFavourites(movieId)}
-                        isFavourite={favouriteMovies && favouriteMovies.includes(m._id)}
-                        addToFavourites={(movieId) => addToFavourites(movieId)}
-                    />
-            )}
-        </div>
-    </div >;
+  if (!movies) return <div className="main-view" />;
+
+  return <div className="movies-list">
+    <VisibilityFilterInput visibilityFilter={visibilityFilter} />
+    {filteredMovies.map(m => <MovieCard key={m._id} movie={m} />)}
+    <footer>
+        <p> Created and Design by Michael Menges. </p>
+        <p> Director information from Wikipedia. Pictures from UnSplash </p>
+    </footer>
+  </div>;
 }
-
-// MoviesList.propTypes = {
-//     moviesToShow: PropTypes.array.isRequired,
-//     visibilityFilter: PropTypes.string.isRequired,
-//     removeFromFavourites: PropTypes.func.isRequired,
-//     addToFavourites: PropTypes.func,
-//     favouriteMovies: PropTypes.array.isRequired,
-// };
-
 export default connect(mapStateToProps)(MoviesList);

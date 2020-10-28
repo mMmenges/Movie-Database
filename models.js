@@ -6,17 +6,20 @@ let movieSchema = mongoose.Schema({
     Description: { type: String, required: true },
     Genre: {
         Name: String,
-        Description: String
+        Description: String,
+        ImagePath: String
     },
     Director: {
         Name: String,
         Bio: String,
+        Born: String,
+        Died: String,
         //      Birth: String
     },
     //    Released: String,
     Actors: [String],
     ImagePath: String,
-    Featured: Boolean
+    Featured: Boolean,
 });
 
 let userSchema = mongoose.Schema({

@@ -19,7 +19,7 @@
   color: goldenrod;
 }
 
-.empty-favourites {
+.empty-favorites {
   display: flex;
   justify-content: center;
   padding-top: 150px;
