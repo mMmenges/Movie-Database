@@ -30,7 +30,6 @@ export class DirectorView extends React.Component {
               <Card.Body>
                 <Card.Title className="director-name">{director.Name}</Card.Title>
                 <Card.Text>Born: {director.Birth}</Card.Text>
-                <Card.Text>Died: {director.Death}</Card.Text>
                 <Card.Text>{director.Bio}</Card.Text>
               </Card.Body>
               <Link to={"/"}>

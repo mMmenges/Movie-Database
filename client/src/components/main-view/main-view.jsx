@@ -11,8 +11,8 @@ import MoviesList from '../movies-list/movies-list';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieView } from '../movie-view/movie-view';
-// import { MovieCard} from '../movie-card/movie-card';
-// import { MoviesView } from "../movies-view/movies-view";
+import { MovieCard} from '../movie-card/movie-card';
+
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
@@ -25,7 +25,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 import './main-view.scss';
-
 
 export class MainView extends React.Component {
 
