@@ -29,7 +29,7 @@ function movies(state = [], action) {
 function user(state = {
     Email: null,
     Birthday: null,
-    FavorMovies: []
+    Favorites: []
 }, action) {
     switch (action.type) {
         case SET_USER:

@@ -10,9 +10,8 @@ import { setMovies, setUser } from '../../actions/actions';
 import MoviesList from '../movies-list/movies-list';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
-import { MovieView } from '../movie-view/movie-view';
 import { MovieCard} from '../movie-card/movie-card';
-
+import { MovieView } from '../movie-view/movie-view';
 import { DirectorView } from '../director-view/director-view';
 import { GenreView } from '../genre-view/genre-view';
 import { ProfileView } from '../profile-view/profile-view';
@@ -98,7 +97,7 @@ export class MainView extends React.Component {
 
         if (!user) {
             return (
-                <Router>
+                <Router basename="/client">
                     <div className="main-view">
                         <Container>
                             <Route exact path="/" render={() => <LoginView onLoggedIn={user => this.onLoggedIn(user)} />} />
@@ -108,6 +107,7 @@ export class MainView extends React.Component {
                 </Router>
             );
         } else {
+            
             return (
                 <Router basename="/client">
                     <Navbar collapseOnSelect expand="lg" bg="custom" variant="dark" className="fixed-top navbar-main">

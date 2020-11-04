@@ -36,7 +36,7 @@ export function MoviesList(props) {
     {filteredMovies.map(m => <MovieCard key={m._id} movie={m} />)}
     <footer>
         <p> Created and Design by Michael Menges. </p>
-        <p> Director information from Wikipedia. Pictures from UnSplash </p>
+        <p> Director information from IMDb | Images and Pictures from Unsplash </p>
     </footer>
   </div>;
 }

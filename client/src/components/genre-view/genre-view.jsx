@@ -43,7 +43,7 @@ export class GenreView extends React.Component {
         </Container>
         <footer>
             <p> Created and Design by Michael Menges. </p>
-            <p> Director information from Wikipedia. Pictures from UnSplash </p>
+            <p> Director information from IMDb | Images and Pictures from Unsplash </p>
         </footer>        
     </div> 
     );

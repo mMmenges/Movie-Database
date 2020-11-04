@@ -1,7 +1,8 @@
-import React from 'react';
+import React from 'react'; 
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
 import './movie-view.scss'
 import Axios from 'axios';
 
@@ -68,8 +69,8 @@ export class MovieView extends React.Component {
                 </Container>
                 <footer>
                 <p> Created and Design by Michael Menges. </p>
-                <p> Director information from Wikipedia. Pictures from UnSplash </p>
-                    </footer>
+                <p> Director information from IMDb | Images and Pictures from Unsplash </p>
+                </footer>
       </div>
     );
   }
@@ -86,12 +87,13 @@ MovieView.propTypes = {
             Description: PropTypes.string.isRequired,
             Img: PropTypes.string.isRequired
         }),
-    Director: PropTypes.shape({
-        Name: PropTypes.string.isRequired,
-        Bio: PropTypes.string.isRequired,
-        Birth: PropTypes.string.isRequired
+        Director: PropTypes.shape({
+          Name: PropTypes.string.isRequired,
+          Bio: PropTypes.string.isRequired,
+          Birth: PropTypes.string.isRequired
+          
     }),
-Starring: PropTypes.array.isRequired,
+Staring: PropTypes.array.isRequired,
 Featured: PropTypes.bool.isRequired
     })
 };
