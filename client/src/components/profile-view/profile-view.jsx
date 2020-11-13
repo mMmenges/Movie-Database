@@ -1,59 +1,8 @@
-
-{/*
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import PropTypes from 'prop-types';
-import './profile-view.scss';
-
-export function ProfileView(props) {
-    const [username, setUsername] = useState(props.username);
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState(props.email);
-    const [birthday, setBirthday] = useState(props.birthday);
-
-    return (
-        <Form className="profileForm">
-            <Form.Row className="align-items-center">
-                <Col xs sm={6} className="profileFormContent">
-                    <Form.Group>
-                        <Form.Label>Username:</Form.Label>
-                        <Form.Control type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId="date">
-                        <Form.Label>Date of Birth:</Form.Label>
-                        <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
-                    </Form.Group>
-                    <Button variant="primary" onClick={() => props.onProfileUpdate(username, password, email, birthday)}>
-                        Submit
-          </Button>
-                </Col>
-            </Form.Row>
-        </Form>
-    )
-}
-
-ProfileView.propTypes = {
-    username: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    birthday: PropTypes.string.isRequired,
-    onProfileUpdate: PropTypes.func.isRequired
-}; */}
-
 import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/actions';
@@ -137,7 +86,7 @@ export class ProfileView extends React.Component {
     const { movies } = this.props;
     const userFavorites = this.state.Favorites;
     const favoritesList = movies.filter((movie) => userFavorites.includes(movie._id));
-
+    let userId  = this.props.match.params.userId;
     return (
       <Container>
         <h1 className="profile-title">Hello and Welcome {this.state.Username}!</h1>
@@ -146,8 +95,10 @@ export class ProfileView extends React.Component {
                         <Card.Text className="profile-text profile-text-first">Username: {this.state.Username}</Card.Text>
             <Card.Text className="profile-text">Email: {this.state.Email}</Card.Text>
             <Card.Text className="profile-text">Birthday: {Moment(this.state.Birthday).format('DD-MMMM-YYYY')}</Card.Text>
-            <Link to={"/users/:userId/update"}>
-              <Button size="sm" variant="dark" className="profile-button">Update Profile</Button>
+            <Link to={`/users/${userId}/update`}>
+              <Button size="sm" variant="dark" className="profile-button">
+                Update Profile
+                </Button>
             </Link>
             <Button onClick={() => this.deleteUser()} size="sm" variant="danger" className="profile-button">Delete Profile</Button>
             <div>

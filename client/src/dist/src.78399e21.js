@@ -39243,142 +39243,6 @@ RegistrationView.propTypes = {
     Birthday: _propTypes.default.instanceOf(Date).isRequired
   })
 };
-{
-  /*
-  import React, { useState } from 'react';
-  import axios from 'axios';
-  import PropTypes from 'prop-types';
-  import { Link } from 'react-router-dom';
-  import Button from 'react-bootstrap/Button';
-  import Form from 'react-bootstrap/Form';
-  import Col from 'react-bootstrap/Col';
-  import './registration-view.scss';
-  import RegImg from './register.jpg';
-  export function RegistrationView(props) {
-     const [username, setUsername] = useState('');
-     const [password, setPassword] = useState('');
-     const [email, setEmail] = useState('');
-     const [birthday, setBirthday] = useState('');
-      const handleRegister = (e) => {
-         e.preventDefault();
-         axios
-             .post('https://oldmyflix-api.herokuapp.com/users', {
-                 Username: username,
-                 Password: password,
-                 Email: email,
-                 Birthday: birthday
-             })
-             .then((response) => {
-                 const data = response.data;
-                 console.log(data);
-                 window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
-             })
-             .catch((e) => {
-                 console.log(e)
-                 console.log('error registering the user');
-             });
-     };
-      return (
-         <div className="registration-view" style={{ backgroundImage: `url(${RegImg})`, backgroundRepeat: 'no-repeat, backgroundSize: "cover" }}> 
-  <h2>Thank you for signing up!</h2>
-  <Form className="registration-form">
-     <Form.Group controlId="formBasicUsername" className="registration-item">
-         <Form.Label>Username:</Form.Label>
-         <Form.Control type="text" value={username} onChange={e => createUsername(e.target.value)} placeholder="Create username" />
-         <Form.Text className="text-muted">
-             Must be alphanumeric and habe a minimum of 5 caracters.
-  </Form.Text>
-  </Form.Group>
-  <Form.Group controlId="formBasicPassword" className="registration-item">
-     <Form.Label>Password:</Form.Label>
-     <Form.Control type="password" value={password} onChange={e => createPassword(e.target.value)} placeholder="Create Password" />
-     <Form.Text className="text-muted">
-         We recommend your password to be 8-20 characters long.
-  </Form.Text>
-  </Form.Group>
-  <Form.Group controlId="formBasicEmail" className="registration-item">
-     <Form.Label>Email:</FormLabel>
-     <Form.Control type="email" value={email} onChange={e => createEmail(e.target.value)} placeholder="Enter valid email" />
-  </Form.Group>
-  <Form.Group controlId="formBasicBirthday" className="registration-item">
-     <Form.Label>Birthday:</Form.Label>
-     <Form.Control type="date" value={birthday} onChange={e => createBirthday(e.target.value)} />
-     </Form.Group>
-  <div className="register-footer">
-     <p>We promise, to keep your private information confidential.</p>
-      <Button onClick={handleRegister} variant="light" type="submit" className="button" >Submit</Button>
-     <Link to={"/"}>
-         <Button variant="outline-light"className="button">Cancel</Button>
-         </Link>
-         </div>
-         </Form>
-         </div>
-      );
-         }
-  // delete all above when not working
-      */
-}
-{}
-/*
-<Form className="registerForm" onSubmit={handleRegister}>
-   <Form.Row className="align-items-center">
-       <Col xs sm={6} className="registerFormContent">
-           <Form.Group>
-               <Form.Label>Username:</Form.Label>
-               <Form.Control type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-           </Form.Group>
-           <Form.Group controlId="formBasicPassword">
-               <Form.Label>Password</Form.Label>
-               <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-           </Form.Group>
-           <Form.Group controlId="formBasicEmail">
-               <Form.Label>Email address</Form.Label>
-               <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-           </Form.Group>
-           <Form.Group controlId="date">
-               <Form.Label>Date of Birth:</Form.Label>
-               <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
-           </Form.Group>
-           <Button variant="primary" type="submit">
-               Submit
- </Button>
- <br></br>
- <br></br>
- <p>We won't share your data with anyone else.</p>
-       </Col>
-   </Form.Row>
-</Form> */
-//RegistrationView.propTypes = {
-// onRegister: PropTypes.func.isRequired
-//  };
-
-{}
-/*
-RegistrationView.propTypes = {
-   user: PropTypes.shape({
-       Username: PropTypes.string.isRequired,
-       Email: Proptypes.string.isRequired,
-       Password: PropTypes.string.isRequired,
-       Birthday: PropTypes.instanceOf(Date).isRequired
-   })
-};
-*/
-//RegistrationView.propTypes = {
-// onRegister: PropTypes.func.isRequired
-//  };
-
-{
-  /*
-  RegistrationView.propTypes = {
-     user: PropTypes.shape({
-         Username: PropTypes.string.isRequired,
-         Email: Proptypes.string.isRequired,
-         Password: PropTypes.string.isRequired,
-         Birthday: PropTypes.instanceOf(Date).isRequired
-     })
-  };
-  */
-}
 },{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/esm/Form.js","./registration-view.scss":"components/registration-view/registration-view.scss","./register.jpg":"components/registration-view/register.jpg"}],"components/login-view/login-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -53293,7 +53157,7 @@ var MovieView = /*#__PURE__*/function (_React$Component) {
       var token = localStorage.getItem('token');
       var userId = localStorage.getItem('user');
 
-      _axios.default.post("https://oldmyflix-api.herokuapp.com/users/".concat(userId, "/Favorites/").concat(movie._id), {
+      _axios.default.post("https://oldmyflix-api.herokuapp.com/users/".concat(userId, "/FavoriteMovies/").concat(movie._id), {
         username: localStorage.getItem('user')
       }, {
         headers: {
@@ -59352,55 +59216,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-{
-  /*
-  import React, { useState } from 'react';
-  import Form from 'react-bootstrap/Form';
-  import Button from 'react-bootstrap/Button';
-  import Col from 'react-bootstrap/Col';
-  import PropTypes from 'prop-types';
-  import './profile-view.scss';
-  export function ProfileView(props) {
-     const [username, setUsername] = useState(props.username);
-     const [password, setPassword] = useState('');
-     const [email, setEmail] = useState(props.email);
-     const [birthday, setBirthday] = useState(props.birthday);
-      return (
-         <Form className="profileForm">
-             <Form.Row className="align-items-center">
-                 <Col xs sm={6} className="profileFormContent">
-                     <Form.Group>
-                         <Form.Label>Username:</Form.Label>
-                         <Form.Control type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
-                     </Form.Group>
-                     <Form.Group controlId="formBasicPassword">
-                         <Form.Label>Password</Form.Label>
-                         <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-                     </Form.Group>
-                     <Form.Group controlId="formBasicEmail">
-                         <Form.Label>Email address</Form.Label>
-                         <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
-                     </Form.Group>
-                     <Form.Group controlId="date">
-                         <Form.Label>Date of Birth:</Form.Label>
-                         <Form.Control type="date" value={birthday} onChange={e => setBirthday(e.target.value)} />
-                     </Form.Group>
-                     <Button variant="primary" onClick={() => props.onProfileUpdate(username, password, email, birthday)}>
-                         Submit
-           </Button>
-                 </Col>
-             </Form.Row>
-         </Form>
-     )
-  }
-  ProfileView.propTypes = {
-     username: PropTypes.string.isRequired,
-     email: PropTypes.string.isRequired,
-     birthday: PropTypes.string.isRequired,
-     onProfileUpdate: PropTypes.func.isRequired
-  }; */
-}
-
 var ProfileView = /*#__PURE__*/function (_React$Component) {
   _inherits(ProfileView, _React$Component);
 
@@ -59504,6 +59319,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var favoritesList = movies.filter(function (movie) {
         return userFavorites.includes(movie._id);
       });
+      var userId = this.props.match.params.userId;
       return _react.default.createElement(_Container.default, null, _react.default.createElement("h1", {
         className: "profile-title"
       }, "Hello and Welcome ", this.state.Username, "!"), _react.default.createElement(_Card.default, {
@@ -59520,7 +59336,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }, "Email: ", this.state.Email), _react.default.createElement(_Card.default.Text, {
         className: "profile-text"
       }, "Birthday: ", (0, _moment.default)(this.state.Birthday).format('DD-MMMM-YYYY')), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/users/:userId/update"
+        to: "/users/".concat(userId, "/update")
       }, _react.default.createElement(_Button.default, {
         size: "sm",
         variant: "dark",
@@ -59617,11 +59433,7 @@ var _reactRedux = require("react-redux");
 
 var _actions = require("../../actions/actions");
 
-var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
-
-var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
-
-var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+var _reactBootstrap = require("react-bootstrap");
 
 require("./profile-update.scss");
 
@@ -59659,25 +59471,28 @@ function ProfileUpdate(props) {
   var _useState5 = (0, _react.useState)(''),
       _useState6 = _slicedToArray(_useState5, 2),
       email = _useState6[0],
-      updateEmail = _useState6[1];
+      setEmail = _useState6[1];
 
-  var _useState$ = _slicedToArray(_react.useState[''], 2),
-      birthday = _useState$[0],
-      updateBirthday = _useState$[1];
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      birthday = _useState8[0],
+      updateBirthday = _useState8[1];
 
   var handleUpdate = function handleUpdate(e) {
     e.preventDefault();
     var token = localStorage.getItem('token');
     var userId = localStorage.getItem('user');
-
-    _axios.default.put('https://oldmyflix-api.herokuapp.com/users/${userID}', {
+    var data = {
       Username: username,
       Password: password,
       Email: email,
       Birthday: birthday
-    }, {
+    };
+    console.log("data:", data);
+
+    _axios.default.put("https://oldmyflix-api.herokuapp.com/users/".concat(userId), data, {
       headers: {
-        Authorization: 'Baerer ${token}'
+        Authorization: "Bearer ".concat(token)
       }
     }).then(function (res) {
       var data = res.data;
@@ -59686,23 +59501,24 @@ function ProfileUpdate(props) {
       window.open("/client/users/:userId", "_self");
     }).catch(function (e) {
       console.log(e);
+      console.log(e.response.data);
       alert('There was an error updating your profile. Please check all fields have been completed.');
     });
   };
 
-  return _react.default.createElement(_Container.default, null, _react.default.createElement("div", {
-    "class": "update-profile",
+  return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("div", {
+    className: "update-profile",
     style: {
       backgroundImage: "url(".concat(_profileUpdate2.default, ")"),
       backgroundRepeat: 'no-repeat',
       backgroundSize: 'cover'
     }
-  }, _react.default.createElement("h2", null, " Update your profile"), _react.default.createElement(_Form.default, {
+  }, _react.default.createElement("h2", null, " Update your profile"), _react.default.createElement(_reactBootstrap.Form, {
     className: "profile-form"
-  }, _react.default.createElement(_Form.default.Group, {
+  }, _react.default.createElement(_reactBootstrap.Form.Group, {
     controlID: "formBasicUsername",
     className: "update-item"
-  }, _react.default.createElement(_Form.default.Label, null, "Username:"), _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Username:"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "text",
     value: username,
     onChange: function onChange(e) {
@@ -59710,34 +59526,34 @@ function ProfileUpdate(props) {
     },
     placeholder: "Update username",
     autoFocus: true
-  }), _react.default.createElement(_Form.default.Text, {
+  }), _react.default.createElement(_reactBootstrap.Form.Text, {
     className: "text-muted"
-  }, "Must be alphanumeric and have a minumum of 5 characters.")), _react.default.createElement(_Form.default.Group, {
+  }, "Must be alphanumeric and have a minumum of 5 characters.")), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicpassword",
     className: "update-item"
-  }, _react.default.createElement(_Form.default.Label, null, "Password:"), _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Password:"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "password",
     value: password,
     onChange: function onChange(e) {
       return updatePassword(e.target.value);
     },
     placeholder: "Update password"
-  }), _react.default.createElement(_Form.default.Text, {
+  }), _react.default.createElement(_reactBootstrap.Form.Text, {
     className: "text-muted"
-  }, "We recommend your password to be 8-20 characters long.")), _react.default.createElement(_Form.default.Group, {
+  }, "We recommend your password to be 8-20 characters long.")), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicEmail",
     className: "update-item"
-  }, _react.default.createElement(_Form.default.Label, null, "Email:"), _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Email:"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "email",
     value: email,
-    onchange: function onchange(e) {
-      return updateEmail(e.target.value);
+    onChange: function onChange(e) {
+      return setEmail(e.target.value);
     },
     placeholder: "Update email"
-  })), _react.default.createElement(_Form.default.Group, {
+  })), _react.default.createElement(_reactBootstrap.Form.Group, {
     controlId: "formBasicBirthday",
     className: "update-item"
-  }, _react.default.createElement(_Form.default.Label, null, "Birthday:"), _react.default.createElement(_Form.default.Control, {
+  }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Birthday:"), _react.default.createElement(_reactBootstrap.Form.Control, {
     type: "data",
     value: birthday,
     onChange: function onChange(e) {
@@ -59745,14 +59561,14 @@ function ProfileUpdate(props) {
     }
   })), _react.default.createElement("div", {
     className: "update-footer"
-  }, _react.default.createElement("p", null, "We won't ever share your private details with anyone else."), _react.default.createElement(_Button.default, {
+  }, _react.default.createElement("p", null, "We won't ever share your private details with anyone else."), _react.default.createElement(_reactBootstrap.Button, {
     onClick: handleUpdate,
     variant: "light",
     type: "submit",
     className: "button"
   }, "Submit"), _react.default.createElement(_reactRouterDom.Link, {
     to: "/users/:userId"
-  }, _react.default.createElement(_Button.default, {
+  }, _react.default.createElement(_reactBootstrap.Button, {
     variant: "outline-light",
     className: "button"
   }, "Cancel"))))));
@@ -59770,9 +59586,52 @@ ProfileUpdate.props = {
 var _default = (0, _reactRedux.connect)(null, {
   setUser: _actions.setUser
 })(ProfileUpdate);
+/*
+<div class="update-profile" style={{ backgroundImage: `url(${UpdateImage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                <h2> Update your profile</h2>
+                <Form className="profile-form">
+                    <Form.Group controlID="formBasicUsername" className="update-item">
+                        <Form.Label>Username:</Form.Label>
+                        <Form.Control type="text" value={username} onChange={e => updateUsername(e.target.value)} placeholder="Update username" autoFocus />
+                        <Form.Text className="text-muted">
+                            Must be alphanumeric and have a minumum of 5 characters.
+                        </Form.Text>
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicpassword" className="update-item">
+                        <Form.Label>Password:</Form.Label>
+                        <Form.Control type="password" value={password} onChange={e => updatePassword(e.target.value)} placeholder="Update password" />
+                        <Form.Text className="text-muted">
+                            We recommend your password to be 8-20 characters long.
+                        </Form.Text>
+                </Form.Group>
+
+                    <Form.Group controlId="formBasicEmail" className="update-item">
+                        <Form.Label>Email:</Form.Label>
+                        <Form.Control type="email" value={email} onchange={e => updateEmail(e.target.value)} placeholder="Update email" />
+                    </Form.Group>
+                    
+                    <Form.Group controlId="formBasicBirthday" className="update-item">
+                        <Form.Label>Birthday:</Form.Label>
+                        <Form.Control type="data" value={birthday} onChange={e => updateBirthday(e.target.value)} />
+                    </Form.Group>
+
+                    <div className="update-footer">
+                        <p>We won't ever share your private details with anyone else.</p>
+
+                        <Button onClick={handleUpdate} variant="light" type="submit" className="button" >Submit</Button>
+                    <Link to={"/users/:userId"}>
+                        <Button variant="outline-light" className="button">Cancel</Button>
+                    </Link>
+                </div>
+            </Form>
+        </div>
+export default connect(null, { setUser })(ProfileUpdate);
+*/
+
 
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Form":"../../node_modules/react-bootstrap/esm/Form.js","./profile-update.scss":"components/profile-update/profile-update.scss","./profile-update.jpg":"components/profile-update/profile-update.jpg"}],"components/main-view/main-view.scss":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","react-bootstrap":"../../node_modules/react-bootstrap/esm/index.js","./profile-update.scss":"components/profile-update/profile-update.scss","./profile-update.jpg":"components/profile-update/profile-update.jpg"}],"components/main-view/main-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -59820,6 +59679,8 @@ var _Nav = _interopRequireDefault(require("react-bootstrap/Nav"));
 var _Navbar = _interopRequireDefault(require("react-bootstrap/Navbar"));
 
 require("./main-view.scss");
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59983,7 +59844,7 @@ var MainView = /*#__PURE__*/function (_React$Component) {
           className: "navbar-link"
         }, "Home"), _react.default.createElement(_Nav.default.Link, {
           as: _reactRouterDom.Link,
-          to: "/users/:userId",
+          to: "/users/".concat(user),
           className: "navbar-link"
         }, "Profile"), _react.default.createElement(_Nav.default.Link, {
           href: "https://mmmenges.github.io/portfolio-website",
@@ -60044,18 +59905,18 @@ var MainView = /*#__PURE__*/function (_React$Component) {
             });
           }
         }), _react.default.createElement(_reactRouterDom.Route, {
-          path: "/users/:userId",
-          render: function render() {
-            return _react.default.createElement(_profileView.ProfileView, {
-              movies: movies
-            });
+          path: "/users/:userId/update",
+          render: function render(props) {
+            return _react.default.createElement(_profileUpdate.ProfileUpdate, _extends({
+              user: user
+            }, props));
           }
         }), _react.default.createElement(_reactRouterDom.Route, {
-          path: "/users/:userId/update",
-          render: function render() {
-            return _react.default.createElement(_profileUpdate.ProfileUpdate, {
+          path: "/users/:userId",
+          render: function render(props) {
+            return _react.default.createElement(_profileView.ProfileView, _extends({
               movies: movies
-            });
+            }, props));
           }
         }))));
       }
@@ -60245,7 +60106,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54636" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58844" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -177,6 +177,7 @@ app.post('/users',
 // redirection to users homepage
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOne({ Username: req.params.Username })
+        .populate("Favorites")
         .then((user) => {
             res.json(user);
         })

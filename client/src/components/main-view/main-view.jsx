@@ -115,7 +115,7 @@ export class MainView extends React.Component {
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
                                 <Nav.Link as={Link} to="/" className="navbar-link">Home</Nav.Link>
-                                <Nav.Link as={Link} to="/users/:userId" className="navbar-link">Profile</Nav.Link>
+                                <Nav.Link as={Link} to={`/users/${user}`} className="navbar-link">Profile</Nav.Link>
                                 <Nav.Link href="https://mmmenges.github.io/portfolio-website" target="_blank" className="navbar-link">My Portfolio</Nav.Link>
                             </Nav>
                             <Button onClick={this.onLogOut} variant="dark" type="submit" className="button log-out-button"> Log Out</Button>
@@ -142,8 +142,11 @@ export class MainView extends React.Component {
                             if (!movies || movies.length === 0) return <div className="main-view" />;
                             return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />
                         }} />
-                        <Route path="/users/:userId" render={() => <ProfileView movies={movies} />} />
-                        <Route path="/users/:userId/update" render={() => <ProfileUpdate movies={movies} />} />
+                        
+                        <Route path="/users/:userId/update" render={(props) => <ProfileUpdate user={user} {...props} />} />
+
+                        <Route path="/users/:userId" render={(props) => <ProfileView movies={movies}  {...props} />} />
+                        
                         </Switch>
                     </div>
                 </Router>
