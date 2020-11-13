@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -19,17 +19,17 @@ export class MovieCard extends React.Component {
       <Card key={movie._id} style={{ width: '30rem' }} className="movie-card" >
         <Card.Img variant="top" src={movie.ImagePath} className="movie-card-img" />
         <Card.Body>
-          <Link to={`/movies/${movie._id}`}>
+          <NavLink to={`/movies/${movie._id}`}>
             <Card.Title className="movie-card-title">{movie.Title + ' - ' + movie.Released}</Card.Title>
-          </Link>
+          </NavLink>
           <Card.Text style={{ maxHeight: 650 }} className="movie-card-description">{movie.Description}</Card.Text>
           <div>
-            <Link to={`/directors/${movie.Director.Name}`}>
-              <Button variant="link" className="movie-links movie-card-director">Director Info</Button>
-            </Link>
-            <Link to={`/genres/${movie.Genre.Name}`}>
+            <NavLink className="movie-links movie-card-director" to={`/directors/${movie.Director.Name}`}>
+            Director Info
+            </NavLink>
+            <NavLink to={`/genres/${movie.Genre.Name}`}>
               <Button variant="link" className="movie-links movie-card-genre">{movie.Genre.Name}</Button>
-            </Link>
+            </NavLink>
           </div>
         </Card.Body>
       </Card>

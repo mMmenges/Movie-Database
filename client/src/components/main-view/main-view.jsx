@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { setMovies, setUser } from '../../actions/actions';
 
-import MoviesList from '../movies-list/movies-list';
 import { RegistrationView } from '../registration-view/registration-view';
 import { LoginView } from '../login-view/login-view';
 import { MovieCard} from '../movie-card/movie-card';
@@ -135,9 +134,10 @@ export class MainView extends React.Component {
 
                         <Route path="/movies/:movieId" render={({ match }) => <MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
                         <Route path="/directors/:name" render={({ match }) => {
-                            if (!movies || movies.length === 0) return <div className="main-view" />;
-                            return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
+                          if (!movies || movies.length === 0) return <div className="main-view" />;
+                        return <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
                         }} />
+
                         <Route path="/genres/:name" render={({ match }) => {
                             if (!movies || movies.length === 0) return <div className="main-view" />;
                             return <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />

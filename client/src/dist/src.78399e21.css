@@ -1,7 +1,34 @@
-.filter-bar {
-  height: 50px;
-  border-bottom: 1px solid #454545;
-  padding: 16px;
+.registerForm {
+  margin-top: 150px;
+}
+
+.registerFormContent {
+  margin: auto;
+}
+.login-view {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 5em;
+  color: #ffffff;
+}
+
+.login-form {
+  margin: 0 auto;
+  text-align: left;
+  max-width: 500px;
+  padding: 50px;
+}
+
+login-item {
+  margin: 20px;
+}
+
+.button {
+  margin: 20px;
+  width: 150px;
 }
 .movie-card {
   display: inline-flex;
@@ -50,38 +77,6 @@
   .movie-card-description {
     display: none;
   }
-}
-.registerForm {
-  margin-top: 150px;
-}
-
-.registerFormContent {
-  margin: auto;
-}
-.login-view {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding-left: 5em;
-  color: #ffffff;
-}
-
-.login-form {
-  margin: 0 auto;
-  text-align: left;
-  max-width: 500px;
-  padding: 50px;
-}
-
-login-item {
-  margin: 20px;
-}
-
-.button {
-  margin: 20px;
-  width: 150px;
 }
 .movie-view-container {
   margin-top: 8em;
