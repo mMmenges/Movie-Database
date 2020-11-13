@@ -9,9 +9,8 @@ import { setUser } from '../../actions/actions';
 import Moment from 'moment';
 
 
-import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import {Row, Col, Container, Button, Card} from 'react-bootstrap';
+
 import './profile-view.scss';
 import ProfileImage from './profile.jpg';
 
@@ -87,8 +86,8 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies } = this.props;
-    const userFavorites = this.state.Favorites;
-    const favoritesList = movies.filter((movie) => userFavorites.includes(movie._id));
+    const {Favorites} = this.state;
+    // const favoritesList = movies.filter((movie) => userFavorites.includes(movie._id));
     let userId  = this.props.match.params.userId;
     console.log(this.state)
     return (
@@ -113,9 +112,9 @@ export class ProfileView extends React.Component {
         </Card>
         <Container fluide="true">
           <h1 className="favorites-title">Your Favorites:</h1>
-          {favoritesList.map((movie) => {
-            return (
-              <Card key={movie._id} style={{ width: '15rem', margin: 15 }} className="fav-movies">
+          <Row>
+          {Favorites.map((movie) => (              <Col md={3} key={movie._id}>
+              <Card style={{ margin: 15 }} className="fav-movies">
                 <Card.Img variant="top" src={movie.ImagePath} style={{ maxHeight: 350 }} />
                 <Card.Body>
                   <Link to={`/movies/${movie._id}`}>
@@ -126,8 +125,9 @@ export class ProfileView extends React.Component {
                   </Button>
                 </Card.Body>
               </Card>
-            );
-          })}
+              </Col>
+            ))}
+          </Row>
         </Container>
       </Container>
     );

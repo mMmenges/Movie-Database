@@ -59182,11 +59182,7 @@ var _actions = require("../../actions/actions");
 
 var _moment = _interopRequireDefault(require("moment"));
 
-var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
-
-var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
-
-var _Card = _interopRequireDefault(require("react-bootstrap/Card"));
+var _reactBootstrap = require("react-bootstrap");
 
 require("./profile-view.scss");
 
@@ -59319,34 +59315,32 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       var _this4 = this;
 
       var movies = this.props.movies;
-      var userFavorites = this.state.Favorites;
-      var favoritesList = movies.filter(function (movie) {
-        return userFavorites.includes(movie._id);
-      });
+      var Favorites = this.state.Favorites; // const favoritesList = movies.filter((movie) => userFavorites.includes(movie._id));
+
       var userId = this.props.match.params.userId;
       console.log(this.state);
-      return _react.default.createElement(_Container.default, null, _react.default.createElement("h1", {
+      return _react.default.createElement(_reactBootstrap.Container, null, _react.default.createElement("h1", {
         className: "profile-title"
-      }, "Hello and Welcome ", this.state.Username, "!"), _react.default.createElement(_Card.default, {
+      }, "Hello and Welcome ", this.state.Username, "!"), _react.default.createElement(_reactBootstrap.Card, {
         style: {
           backgroundImage: "url(".concat(_profile.default, ")"),
           backgroundSize: 'cover',
           width: '50rem'
         },
         className: "profile-view"
-      }, _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Text, {
+      }, _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactBootstrap.Card.Text, {
         className: "profile-text profile-text-first"
-      }, "Username: ", this.state.Username), _react.default.createElement(_Card.default.Text, {
+      }, "Username: ", this.state.Username), _react.default.createElement(_reactBootstrap.Card.Text, {
         className: "profile-text"
-      }, "Email: ", this.state.Email), _react.default.createElement(_Card.default.Text, {
+      }, "Email: ", this.state.Email), _react.default.createElement(_reactBootstrap.Card.Text, {
         className: "profile-text"
       }, "Birthday: ", (0, _moment.default)(this.state.Birthday).format('DD-MMMM-YYYY')), _react.default.createElement(_reactRouterDom.Link, {
         to: "/users/".concat(userId, "/update")
-      }, _react.default.createElement(_Button.default, {
+      }, _react.default.createElement(_reactBootstrap.Button, {
         size: "sm",
         variant: "dark",
         className: "profile-button"
-      }, "Update Profile")), _react.default.createElement(_Button.default, {
+      }, "Update Profile")), _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
           return _this4.deleteUser();
         },
@@ -59356,38 +59350,39 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
       }, "Delete Profile"), _react.default.createElement("div", null, _react.default.createElement("p", null)), _react.default.createElement(_reactRouterDom.Link, {
         to: "/",
         className: "profile-back"
-      }, "Back"))), _react.default.createElement(_Container.default, {
+      }, "Back"))), _react.default.createElement(_reactBootstrap.Container, {
         fluide: "true"
       }, _react.default.createElement("h1", {
         className: "favorites-title"
-      }, "Your Favorites:"), favoritesList.map(function (movie) {
-        return _react.default.createElement(_Card.default, {
-          key: movie._id,
+      }, "Your Favorites:"), _react.default.createElement(_reactBootstrap.Row, null, Favorites.map(function (movie) {
+        return _react.default.createElement(_reactBootstrap.Col, {
+          md: 3,
+          key: movie._id
+        }, _react.default.createElement(_reactBootstrap.Card, {
           style: {
-            width: '15rem',
             margin: 15
           },
           className: "fav-movies"
-        }, _react.default.createElement(_Card.default.Img, {
+        }, _react.default.createElement(_reactBootstrap.Card.Img, {
           variant: "top",
           src: movie.ImagePath,
           style: {
             maxHeight: 350
           }
-        }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_reactRouterDom.Link, {
+        }), _react.default.createElement(_reactBootstrap.Card.Body, null, _react.default.createElement(_reactRouterDom.Link, {
           to: "/movies/".concat(movie._id)
-        }, _react.default.createElement(_Button.default, {
+        }, _react.default.createElement(_reactBootstrap.Button, {
           size: "sm",
           variant: "link"
-        }, "Details")), _react.default.createElement(_Button.default, {
+        }, "Details")), _react.default.createElement(_reactBootstrap.Button, {
           size: "sm",
           variant: "link",
           onClick: function onClick() {
             return _this4.deleteFavorites(movie);
           },
           className: "remove-fav"
-        }, "Remove")));
-      })));
+        }, "Remove"))));
+      }))));
     }
   }]);
 
@@ -59410,7 +59405,7 @@ var _default = (0, _reactRedux.connect)(null, {
 })(ProfileView);
 
 exports.default = _default;
-},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","moment":"../node_modules/moment/moment.js","react-bootstrap/Container":"../../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Button":"../../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Card":"../../node_modules/react-bootstrap/esm/Card.js","./profile-view.scss":"components/profile-view/profile-view.scss","./profile.jpg":"components/profile-view/profile.jpg"}],"components/profile-update/profile-update.scss":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../../node_modules/axios/index.js","prop-types":"../node_modules/prop-types/index.js","react-router-dom":"../node_modules/react-router-dom/esm/react-router-dom.js","react-redux":"../node_modules/react-redux/es/index.js","../../actions/actions":"actions/actions.js","moment":"../node_modules/moment/moment.js","react-bootstrap":"../../node_modules/react-bootstrap/esm/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","./profile.jpg":"components/profile-view/profile.jpg"}],"components/profile-update/profile-update.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
