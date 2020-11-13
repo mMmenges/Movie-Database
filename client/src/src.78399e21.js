@@ -635,7 +635,7 @@ if ("development" !== "production") {
         // breaks IE9: https://github.com/facebook/react/issues/13610
         // eslint-disable-next-line react-internal/no-production-logging
 
-        Function.prototype.apply.call(console[level], console, argsWithFormat);
+        Function.protoType.apply.call(console[level], console, argsWithFormat);
 
         try {
           // --- Welcome to debugging React ---

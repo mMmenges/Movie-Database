@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import './director-view.scss';
-//
+import DirectorImage from './director.jpg';
 export class DirectorView extends React.Component {
 
 //  constructor(props) {
@@ -25,7 +25,7 @@ console.log(this.props)
         <Container>
           <div className="director-view-container">
             <Card style={{ width: '45rem' }} className="director-card">
-             {/* <Card.Img variant="top" src={DirectorImage} style={{ maxHeight: 400 }} /> */}
+             <Card.Img variant="top" src={DirectorImage} style={{ maxHeight: 400 }} />
               <Card.Body>
                 <Card.Title className="director-name">{director.Name}</Card.Title>
                 <Card.Text>Birth: {director.Birth}</Card.Text>

@@ -11,7 +11,7 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import './profile-update.scss';
-// import UpdateImage from './profile-update.jpg';
+import UpdateImage from './profile-update.jpg';
 
 export function ProfileUpdate(props) {
     const [username, updateUsername] = useState('');
@@ -88,7 +88,7 @@ export function ProfileUpdate(props) {
         </div>
 </Container>
     )
-};
+}
 
 ProfileUpdate.props = {
     user: PropTypes.shape({

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
+//import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import './login-view.scss';
-import login from './login.jpg'
+import login from './login.jpg';
+//import { FormControl } from 'react-bootstrap';
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
@@ -33,6 +35,26 @@ export function LoginView(props) {
           <h1>myFlix!</h1>
         </div>
         <Form className="login-form">
+        
+        
+        {/*    <Form.Group controlId="formBasicUsername" className="login-item">
+                <Form.Label>Username:</Form.Label>
+                <FormControl type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter username" />
+            </Form.Group>
+
+            <FormGroup controlId="formBasicPassword" className="login-item">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
+            </FormGroup>
+
+            <Form.Group controlId="formBasicCheckbox" className="login-item">
+                <Form.Check type="checkbox" label="Check if you are ready for myFlix!" />
+            </Form.Group>
+
+            <Button onClick={handleSubmit} variant="danger" type="submit" className="button" >Login</Button>
+            <Link to={"/register"}>
+                <Button variant="outline-light" className="button">Register</Button>
+    </Link> */}
             <Form.Row className="align-items-center">
                 <Col xs sm={6} className="loginFormContent">
                     <Form.Group>
@@ -47,17 +69,29 @@ export function LoginView(props) {
                         Login
           </Button>
                     <br />
-                    <label>Not yet a member?</label>
+                    <label>You're not a member yet?</label>
                     <Link to={`/register`}>
                         <Button variant="link"> Sign Up</Button>
                     </Link>
                 </Col>
-            </Form.Row>
+    </Form.Row>
         </Form>
         </div>
     );
 }
 
-LoginView.propTypes = {
-    onLoggedIn: PropTypes.func.isRequired
+//LoginView.propTypes = {
+//onLoggedIn: PropTypes.func.isRequired,
+//};
+
+
+LoginView.PropTypes = {
+    user: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired
+    }),
+    onLoggedIn: PropTypes.func.isRequired,
 };
+
+
+// export default connect(null, {setUser})(LoginView);

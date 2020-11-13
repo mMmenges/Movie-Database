@@ -1,53 +1,49 @@
 $primarycolor: #ffffff;
 $secondarycolor: #000000;
 $tertiarycolor: #030c61;
-
 .movie-card {
-  display: inline-flex;
-  margin: 3.5em;
+    display: inline-flex;
+    margin: 3.5em;
 }
 
 .movie-card-title {
-  color: $tertiarycolor;
-  font-family: 'Bangers', cursive;
-  font-size: 2em;
-  padding-bottom: 0.5em;
+    color: $tertiarycolor;
+    font-family: 'Bangers', cursive;
+    font-size: 2em;
+    padding-bottom: 0.5em;
 }
 
 .movie-card-description {
-  height: 20em;
+    height: 20em;
 }
 
 .movie-links {
-  font-family: 'Bangers', cursive;
-  font-size: 1.3em;
-  color: $tertiarycolor;
-  margin-bottom: 0.3em;
+    font-family: 'Arial', cursive;
+    font-size: 1.3em;
+    color: $tertiarycolor;
+    margin-bottom: 0.3em;
 }
 
 .movie-card-director {
-  float: left;
-  margin-left: 2em;
+    float: left;
+    margin-left: 2em;
 }
 
 .movie-card-genre {
-  float: right;
-  margin-right: 2em;
+    float: right;
+    margin-right: 2em;
 }
 
 @media all and (max-width: 750px) {
-  .movie-card {
-    max-width: 75%;
-    margin: 2em;
-  } 
-
-  .movie-links {
-    font-size: 1.2em;
-    margin: 0;
-  }
-
-  .movie-card-description {
-    display: none;
-  }
-
+    .movie-card {
+        max-width: 75%;
+        margin: 2em;
+    }
+    .movie-links {
+        font-size: 1.2em;
+        margin: 0;
+    }
+    .movie-card-description {
+        display: none;
+    }
 }

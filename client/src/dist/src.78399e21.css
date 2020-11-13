@@ -47,7 +47,7 @@ login-item {
 }
 
 .movie-links {
-  font-family: "Bangers", cursive;
+  font-family: "Arial", cursive;
   font-size: 1.3em;
   color: #030c61;
   margin-bottom: 0.3em;
@@ -187,6 +187,10 @@ login-item {
 
 .profileFormContent {
   margin: auto;
+}
+
+.profile-back {
+  color: white;
 }
 .update-profile {
   width: 100%;
