@@ -59250,6 +59250,8 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (res) {
+        console.log("get user", res.data);
+
         _this2.setState({
           Username: res.data.Username,
           Password: res.data.Password,
@@ -59258,7 +59260,9 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
           Favorites: res.data.Favorites
         });
       }).catch(function (err) {
+        console.log("get user error");
         console.log(err);
+        console.log(err.response.data);
       });
     }
   }, {
@@ -59320,6 +59324,7 @@ var ProfileView = /*#__PURE__*/function (_React$Component) {
         return userFavorites.includes(movie._id);
       });
       var userId = this.props.match.params.userId;
+      console.log(this.state);
       return _react.default.createElement(_Container.default, null, _react.default.createElement("h1", {
         className: "profile-title"
       }, "Hello and Welcome ", this.state.Username, "!"), _react.default.createElement(_Card.default, {

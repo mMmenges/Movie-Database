@@ -36,6 +36,7 @@ export class ProfileView extends React.Component {
     axios.get(`https://oldmyflix-api.herokuapp.com/users/${userId}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then((res) => {
+      console.log("get user",res.data)
       this.setState({
         Username: res.data.Username,
         Password: res.data.Password,
@@ -45,7 +46,9 @@ export class ProfileView extends React.Component {
       });
 
     }).catch(function (err) {
+      console.log("get user error")
       console.log(err);
+      console.log(err.response.data);
     });
   }
 
@@ -87,6 +90,7 @@ export class ProfileView extends React.Component {
     const userFavorites = this.state.Favorites;
     const favoritesList = movies.filter((movie) => userFavorites.includes(movie._id));
     let userId  = this.props.match.params.userId;
+    console.log(this.state)
     return (
       <Container>
         <h1 className="profile-title">Hello and Welcome {this.state.Username}!</h1>
