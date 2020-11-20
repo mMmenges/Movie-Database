@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { connect } from 'react-redux';
 import { setUser } from '../../actions/actions';
@@ -70,12 +70,17 @@ export class ProfileView extends React.Component {
   deleteFavorites(movie) {
     const token = localStorage.getItem('token');
     const userId = localStorage.getItem('user');
-    axios.delete(`https://oldmyflix-api.herokuapp.com/users/${userId}/Favorites/${movie._id}`, {
+    console.log(userId)
+    axios.delete(`https://oldmyflix-api.herokuapp.com/users/${userId}/FavoriteMovies/${movie._id}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then((res) => {
       console.log(res);
-      this.componentDidMount();
-    });
+      //this.componentDidMount() should only be called once
+      // and never repeated by you. only react needs to call this  method
+      // this.componentDidMount();
+   
+    this.getUser(token);
+    }).catch(er => {console.log(er.response)});
   }
 
   onLogOut() {
@@ -85,7 +90,7 @@ export class ProfileView extends React.Component {
   }
 
   render() {
-    const { movies } = this.props;
+   // const { movies } = this.props;
     const {Favorites} = this.state;
     // const favoritesList = movies.filter((movie) => userFavorites.includes(movie._id));
     let userId  = this.props.match.params.userId;
@@ -120,9 +125,7 @@ export class ProfileView extends React.Component {
                   <Link to={`/movies/${movie._id}`}>
                     <Button size="sm" variant="link">Details</Button>
                   </Link>
-                  <Button size="sm" variant="link" onClick={() => this.deleteFavorites(movie)} className="remove-fav">
-                    Remove
-                  </Button>
+                  <Button size="sm" variant="link" onClick={() => this.deleteFavorites(movie)} className="remove-fav">Remove</Button>
                 </Card.Body>
               </Card>
               </Col>

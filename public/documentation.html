@@ -99,7 +99,7 @@
         <h3>9. Allowing users to add a movie to their favorites list</h3>
         <ul>
             <li>Method type: POST</li>
-            <li>Query Perameters: '/users/username/favorites/_id'</li>
+            <li>Query Perameters: '/users/:username/FavoriteMovies/_id'</li>
             <li>
                 Data in Body of Request: None (movie object already exists in app)
             </li>
@@ -112,7 +112,7 @@
         <h3>10. Allowing users to remove a movie from their list of favorites</h3>
         <ul>
             <li>Method type: DELETE</li>
-            <li>Query Perameters: '/users/username/favorites/_id'</li>
+            <li>Query Perameters: '/users/:username/FavoriteMovies/_id'</li>
             <li>Data in Body of Request: None</li>
             <li>
                 Response: A text message confirming movie successfully deleted from list.

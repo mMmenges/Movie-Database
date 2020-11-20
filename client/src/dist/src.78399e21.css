@@ -43,7 +43,7 @@ login-item {
 }
 
 .movie-card-description {
-  height: 20em;
+  height: 10em;
 }
 
 .movie-links {
@@ -192,6 +192,11 @@ login-item {
 .profile-back {
   color: white;
 }
+
+.remove-fav {
+  position: absolute;
+  right: 25px;
+}
 .update-profile {
   width: 100%;
   height: 100%;
@@ -209,9 +214,10 @@ login-item {
 
 .update-profile {
   color: #ffffff;
-  margin: 0 auto;
+  margin: 100 auto;
   text-align: left;
   max-width: 600px;
+  max-height: 1000px;
   padding: 50px;
 }
 
