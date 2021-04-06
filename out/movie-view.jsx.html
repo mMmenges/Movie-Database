@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: movie-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: movie-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import Axios from 'axios'; 
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Card, Button, Container } from 'react-bootstrap';
+import './movie-view.scss';
+
+/**
+ * @require react
+ * @require axios
+ * @require prop-types 
+ * @require react-router-dom
+ * @require react-bootstrap
+ * @require ./movie-view.scss
+ */
+
+export class MovieView extends React.Component {
+
+    constructor() {
+        super();
+
+        this.state = {};
+    }
+/**
+   * Using a function to improve the formatting of the starting data. This is adding
+   * a comma between first and last names.
+   * @function formatString
+   * @param {string} staring 
+   */
+
+
+    formatStaring(staring) {
+        if (staring) staring = staring.join(', ');
+        return staring;
+    }
+
+    /**
+   * when a user selects their favorite movie this function enable it to be added to the
+   * users favorite movie list in their profile view
+   * @function addToFavorites
+   * @param {array} movie 
+   */
+
+    addToFavorites(movie) {
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('user');
+        Axios.post(`https://oldmyflix-api.herokuapp.com/users/${userId}/FavoriteMovies/${movie._id}`, { username: localStorage.getItem('user') }, {
+            headers: { Authorization: `Bearer ${token}` },
+          }).then((res) => {
+            console.log(res);
+            alert('This movie has been added to your Favorites.');
+          });
+        }
+
+/**
+   * function to allow users to log out of the app
+   * @function onLogOut
+   */
+
+        onLogOut() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.open('/client', '_self');                     
+        }
+   
+/**
+   * rendering the whole imformation for the movie in a new movie view
+   */
+
+        render() {
+            const { movie } = this.props;
+        
+            if (!movie) return null;
+        
+            return (
+              &lt;div>
+                &lt;Container className="movie-view-container">
+                  &lt;div className="movie-view">
+                    &lt;img src={movie.ImagePath} className="movie-view-img" />
+                    &lt;Card style={{ width: '33rem', height: '49rem' }} className="movie-view-card">
+                      &lt;Card.Body className="movie-view-body">
+                        &lt;Card.Title className="movie-view-title">{movie.Title + ' - ' + movie.Released}&lt;/Card.Title>
+                        &lt;Card.Text className="movie-view-text">{movie.Description}&lt;/Card.Text>
+                        &lt;Card.Text className="movie-view-text">This movie was released in {movie.Released}.&lt;/Card.Text>
+                        &lt;h1 className="movie-view-heading">Staring: &lt;/h1>
+                        &lt;Card.Text className="movie-view-text">{this.formatStaring(movie.Staring)}&lt;/Card.Text>
+                        &lt;h1 className="movie-view-heading">Director: &lt;/h1>
+                        &lt;Card.Text className="movie-view-text">{movie.Director.Name}&lt;/Card.Text>
+                        &lt;h1 className="movie-view-heading">Genre: &lt;/h1>
+                        &lt;Card.Text className="movie-view-text">{movie.Genre.Name}&lt;/Card.Text>
+                      &lt;/Card.Body>
+                      &lt;div className="movie-view-links">
+                        &lt;Button variant="link" onClick={() => this.addToFavorites(movie)} className="movie-card-fav">Add to favorite movies&lt;/Button>
+                        &lt;Link to={"/"}>
+                          &lt;Button variant="link" className="movie-view-back">Back&lt;/Button>
+                        &lt;/Link>
+                      &lt;/div>
+                    &lt;/Card>
+                  &lt;/div>
+                &lt;/Container>
+                &lt;footer>
+                &lt;p> Created and Design by Michael Menges. &lt;/p>
+                &lt;p> Director information from IMDb | Images and Pictures from Unsplash &lt;/p>
+                &lt;/footer>
+      &lt;/div>
+    );
+  }
+}
+
+/**
+ * setting the prop types that are allowed for the movie view
+
+ */
+
+MovieView.propTypes = {
+    movie: PropTypes.shape({
+        Titel: PropTypes.string,
+        Description: PropTypes.string,
+        ImagePath: PropTypes.string.isRequired,
+        Released: PropTypes.string.isRequired,
+        Genre: PropTypes.shape ({
+            Name: PropTypes.string.isRequired,
+            Description: PropTypes.string.isRequired,
+            Img: PropTypes.string.isRequired
+        }),
+        Director: PropTypes.shape({
+          Name: PropTypes.string.isRequired,
+          Bio: PropTypes.string.isRequired,
+          Birth: PropTypes.string.isRequired
+          
+    }),
+Staring: PropTypes.array.isRequired,
+Featured: PropTypes.bool.isRequired
+    })
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MovieView.html">MovieView</a></li></ul><h3>Global</h3><ul><li><a href="global.html#addToFavorites">addToFavorites</a></li><li><a href="global.html#formatString">formatString</a></li><li><a href="global.html#onLogOut">onLogOut</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Apr 06 2021 08:32:57 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

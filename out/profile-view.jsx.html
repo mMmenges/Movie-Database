@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: profile-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: profile-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { setUser } from '../../actions/actions';
+import Moment from 'moment';
+import {Row, Col, Container, Button, Card} from 'react-bootstrap';
+import './profile-view.scss';
+import ProfileImage from './profile.jpg';
+
+/**
+ * @requires React
+ * @requires axios
+ * @requires prop-types 
+ * @requires react-router-dom
+ * @requires react-redux
+ * @requires moment
+ * @requires ../../actions/actions
+ * @requires react-bootstrap
+ * @requires ./profile-view.scss
+ * @requires ./profile.jpg
+ */
+
+export class ProfileView extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: null,
+      password: null,
+      email: null,
+      birthday: null,
+      Favorites: [],
+      movies: [],
+    };
+  }
+
+  /**
+   * function call to get the user token to be able to display the current users information
+   * @function getUser
+   * @param {string} token 
+   */
+
+  getUser(token) {
+    const userId = localStorage.getItem('user');
+
+    axios.get(`https://oldmyflix-api.herokuapp.com/users/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then((res) => {
+      console.log("get user",res.data)
+      this.setState({
+        Username: res.data.Username,
+        Password: res.data.Password,
+        Email: res.data.Email,
+        Birthday: res.data.Birthday,
+        Favorites: res.data.Favorites
+      });
+
+    }).catch(function (err) {
+      console.log("get user error")
+      console.log(err);
+      console.log(err.response.data);
+    });
+  }
+
+  componentDidMount() {
+    const accessToken = localStorage.getItem('token');
+    this.getUser(accessToken);
+  }
+
+/**
+  * function enabling the user to delete their profile from the database should they wish to.
+  * This code also includes a double check alert to comfirm deletion.
+  * @function deleteUser
+  * @param {string} token 
+  */
+
+  deleteUser(token) {
+    const userId = localStorage.getItem('user');
+    if (!confirm('Do you really want to delete your profile?')) return;
+    axios.delete(`https://oldmyflix-api.herokuapp.com/users/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then((res) =>
+      console.log(res));
+    localStorage.removeItem('token');
+    window.open('/client', '_self');
+  }
+
+  /**
+  * function enabling the user to delete movies from their favorite movies list
+  * @function deleteFavorites
+  * @param {array} movie 
+  */
+
+  deleteFavorites(movie) {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('user');
+    console.log(userId)
+    axios.delete(`https://oldmyflix-api.herokuapp.com/users/${userId}/FavoriteMovies/${movie._id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then((res) => {
+      console.log(res);
+      //this.componentDidMount() should only be called once
+      // and never repeated by you. only react needs to call this  method
+      // this.componentDidMount();
+   
+    this.getUser(token);
+    }).catch(er => {console.log(er.response)});
+  }
+
+/**
+   * function to allow users to log out of the app
+   * @function onLogOut
+   */
+
+  onLogOut() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.open('/client', '_self');
+  }
+
+/**
+   * rendering the profile view to display the current users information as well as their favorite 
+   * movies list as created by the current user. Favorite movies can be viewed or deleted
+   * from this view.
+   */
+
+  render() {
+   // const { movies } = this.props;
+    const {Favorites} = this.state;
+    // const favoritesList = movies.filter((movie) => userFavorites.includes(movie._id));
+    let userId  = this.props.match.params.userId;
+    console.log(this.state)
+    return (
+      &lt;Container>
+        &lt;h1 className="profile-title">Hello and Welcome {this.state.Username}!&lt;/h1>
+        &lt;Card style={{ backgroundImage: `url(${ProfileImage})`, backgroundSize: 'cover', width: '50rem' }} className="profile-view">
+          &lt;Card.Body>
+                        &lt;Card.Text className="profile-text profile-text-first">Username: {this.state.Username}&lt;/Card.Text>
+            &lt;Card.Text className="profile-text">Email: {this.state.Email}&lt;/Card.Text>
+            &lt;Card.Text className="profile-text">Birthday: {Moment(this.state.Birthday).format('DD-MMMM-YYYY')}&lt;/Card.Text>
+            &lt;Link to={`/users/${userId}/update`}>
+              &lt;Button size="sm" variant="dark" className="profile-button">
+                Update Profile
+                &lt;/Button>
+            &lt;/Link>
+            &lt;Button onClick={() => this.deleteUser()} size="sm" variant="danger" className="profile-button">Delete Profile&lt;/Button>
+            &lt;div>
+&lt;p>&lt;/p>
+            &lt;/div>
+            &lt;Link to={`/`} className="profile-back">Back&lt;/Link>
+          &lt;/Card.Body>
+        &lt;/Card>
+        &lt;Container fluide="true">
+          &lt;h1 className="favorites-title">Your Favorites:&lt;/h1>
+          &lt;Row>
+          {Favorites.map((movie) => (              &lt;Col md={3} key={movie._id}>
+              &lt;Card style={{ margin: 15 }} className="fav-movies">
+                &lt;Card.Img variant="top" src={movie.ImagePath} style={{ maxHeight: 350 }} />
+                &lt;Card.Body>
+                  &lt;Link to={`/movies/${movie._id}`}>
+                    &lt;Button size="sm" variant="link">Details&lt;/Button>
+                  &lt;/Link>
+                  &lt;Button size="sm" variant="link" onClick={() => this.deleteFavorites(movie)} className="remove-fav">Remove&lt;/Button>
+                &lt;/Card.Body>
+              &lt;/Card>
+              &lt;/Col>
+            ))}
+          &lt;/Row>
+        &lt;/Container>
+      &lt;/Container>
+    );
+  }
+}
+
+/**
+ * setting the prop types to the profile view that are required for the users profile
+ */
+
+ProfileView.propTypes = {
+  user: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Password: PropTypes.string,
+    Birthday: PropTypes.instanceOf(Date).isRequired,
+    Favorites: PropTypes.array
+  })
+};
+
+export default connect(null, { setUser })(ProfileView);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ProfileView.html">ProfileView</a></li></ul><h3>Global</h3><ul><li><a href="global.html#deleteFavorites">deleteFavorites</a></li><li><a href="global.html#deleteUser">deleteUser</a></li><li><a href="global.html#getUser">getUser</a></li><li><a href="global.html#onLogOut">onLogOut</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Apr 06 2021 09:17:32 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

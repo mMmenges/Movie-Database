@@ -1,0 +1,28 @@
+$primarycolor: #ffffff;
+$secondarycolor: #000000;
+$tertiarycolor: #030c61;
+
+.director-view-container {
+  margin-top: 8em;
+}
+
+.director-card {
+margin: 0 auto;
+}
+
+.director-name {
+  font-family: 'Bangers', cursive;
+  font-size: 3em;
+  padding-top: 0.6em;
+  padding-bottom: 0.8em;
+}
+
+.director-view-back {
+  float: right;
+}
+
+@media all and (max-width: 800px) {
+  .director-card {
+    max-width: 90%;
+  }
+}

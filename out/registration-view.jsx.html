@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: registration-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: registration-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import './registration-view.scss';
+import Register from './register.jpg';
+
+ 
+/**
+ * @requires React
+ * @requires axios
+ * @requires prop-types 
+ * @requires react-router-dom
+ * @requires react-bootstrap/Button
+ * @requires react-bootstrap/Form
+ * @requires ./registration-view.scss
+ * @requires ./register.jpg
+ */
+
+/**
+ * exporting the registration view function to allow new users to register their information
+ * @function RegistrationView
+ * @param {string} props 
+ */
+
+export function RegistrationView(props) {
+  const [username, createUsername] = useState('');
+  const [password, createPassword] = useState('');
+  const [email, createEmail] = useState('');
+  const [birthday, createBirthday] = useState('');
+
+/**
+ * submitting the register information to be added 
+ * @type {*} username
+ * @type {*} password
+ * @type {*} email
+ * @type {*} birthday
+ */
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    axios.post('https://oldmyflix-api.herokuapp.com/users',
+      {
+        Username: username,
+        Password: password,
+        Email: email,
+        Birthday: birthday
+      }).then((res) => {
+        const data = res.data;
+        console.log(data);
+        alert('Congratulations! Your account has been created - you can now login.');
+        window.open('/client', '_self');
+      }).catch((e) => {
+        console.log('registration error');
+        alert('There was an error with your registration.');
+      });
+  };
+
+  /**
+   * returning the registration form with the required fields for users to complete
+   */
+
+  return (
+    &lt;div className="registration-view" style={{ backgroundImage: `url(${Register})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+      &lt;h2>Thanks for signing up!&lt;/h2>
+      &lt;Form className="registration-form">
+        &lt;Form.Group controlId="formBasicUsername" className="registration-item">
+          &lt;Form.Label>Username:&lt;/Form.Label>
+          &lt;Form.Control type="text" value={username} onChange={e => createUsername(e.target.value)} placeholder="Create username" />
+          &lt;Form.Text className="text-muted">
+            Must be alphanumeric and have a minimim of 5 characters.
+      &lt;/Form.Text>
+        &lt;/Form.Group>
+
+        &lt;Form.Group controlId="formBasicpassword" className="registration-item">
+          &lt;Form.Label>Password:&lt;/Form.Label>
+          &lt;Form.Control type="password" value={password} onChange={e => createPassword(e.target.value)} placeholder="Create password" />
+          &lt;Form.Text className="text-muted">
+            We recommend your password to be 8-20 characters long.
+      &lt;/Form.Text>
+        &lt;/Form.Group>
+
+        &lt;Form.Group controlId="formBasicEmail" className="registration-item">
+          &lt;Form.Label>Email&lt;/Form.Label>
+          &lt;Form.Control type="email" value={email} onChange={e => createEmail(e.target.value)} placeholder="Enter valid email" />
+        &lt;/Form.Group>
+
+        &lt;Form.Group controlId="formBasicBirthday" className="registration-item">
+          &lt;Form.Label>Birthday:&lt;/Form.Label>
+          &lt;Form.Control type="date" value={birthday} onChange={e => createBirthday(e.target.value)} />
+        &lt;/Form.Group>
+
+        &lt;div className="register-footer">
+          &lt;p>We'll never share your private details with anyone else.&lt;/p>
+
+          &lt;Button onClick={handleRegister} variant="light" type="submit" className="button" >Submit&lt;/Button>
+          &lt;Link to={"/"}>
+            &lt;Button variant="outline-light" className="button">Cancel&lt;/Button>
+          &lt;/Link>
+        &lt;/div>
+      &lt;/Form>
+    &lt;/div >
+  );
+}
+
+/**
+ * setting the prop types to the registration view that are required to register
+ */
+
+RegistrationView.propTypes = {
+  user: PropTypes.shape({
+    Username: PropTypes.string.isRequired,
+    Email: PropTypes.string.isRequired,
+    Password: PropTypes.string.isRequired,
+    Birthday: PropTypes.instanceOf(Date).isRequired
+  })
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#RegistrationView">RegistrationView</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Apr 06 2021 09:26:17 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

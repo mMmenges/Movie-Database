@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: profile-update.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: profile-update.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setUser } from '../../actions/actions';
+import {Form, Button, Container} from 'react-bootstrap';
+import './profile-update.scss';
+import UpdateImage from './profile-update.jpg';
+
+/**
+ * @requires react
+ * @requires axios
+ * @requires prop-types
+ * @requires react-router-dom
+ * @requires react-redux
+ * @requires ../../actions/actions
+ * @requires react-bootstrap
+ * @requires ./profile-update.scss
+ * @requires ./profile-update.jpg
+ */
+
+/**
+ * exporting the profile update view function to allow users to update their existing profile information
+ * @function ProfileUpdate
+ * @param {*} props 
+ */
+
+export function ProfileUpdate(props) {
+    const [username, updateUsername] = useState('');
+    const [password, updatePassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [birthday, updateBirthday] = useState('');
+
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+
+        const token = localStorage.getItem('token');
+        const  userId = localStorage.getItem('user');
+        let data =  {
+            Username: username,
+            Password: password,
+            Email: email,
+            Birthday: birthday,
+        }
+
+        console.log("data:", data)
+        axios.put(`https://oldmyflix-api.herokuapp.com/users/${userId}`,
+           data,
+            { headers: { Authorization: `Bearer ${token}` } }
+        ).then((res) => {
+            const data = res.data;
+            localStorage.setItem("user", data.Username);
+            alert('Your profile was successfully updated.');
+            window.open("/client/users/:userId", "_self");
+        })
+            .catch((e) => {
+                console.log(e);
+                console.log(e.response.data)
+                alert('There was an error updating your profile. Please check all fields have been completed.');
+            });
+    };
+
+ /**
+   * returning the update profile form with the required fields for users to complete in order to update 
+   * their information
+   */
+
+    return (
+        &lt;Container>
+           &lt;div className="update-profile" style={{ backgroundImage: `url(${UpdateImage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                &lt;h2> Update your profile&lt;/h2>
+                &lt;Form className="profile-form">
+                    &lt;Form.Group controlID="formBasicUsername" className="update-item">
+                        &lt;Form.Label>Username:&lt;/Form.Label>
+                        &lt;Form.Control type="text" value={username} onChange={e => updateUsername(e.target.value)} placeholder="Update username" autoFocus />
+                        &lt;Form.Text className="text-muted">
+                            Must be alphanumeric and have a minumum of 5 characters.
+                        &lt;/Form.Text>
+                    &lt;/Form.Group>
+
+                    &lt;Form.Group controlId="formBasicpassword" className="update-item">
+                        &lt;Form.Label>Password:&lt;/Form.Label>
+                        &lt;Form.Control type="password" value={password} onChange={e => updatePassword(e.target.value)} placeholder="Update password" />
+                        &lt;Form.Text className="text-muted">
+                            We recommend your password to be 8-20 characters long.
+                        &lt;/Form.Text>
+                &lt;/Form.Group>
+
+                    &lt;Form.Group controlId="formBasicEmail" className="update-item">
+                        &lt;Form.Label>Email:&lt;/Form.Label>
+                        &lt;Form.Control 
+                            type="email" 
+                            value={email}
+                            onChange={e => setEmail(e.target.value)} 
+                            placeholder="Update email" />
+                    &lt;/Form.Group>
+                    
+                    &lt;Form.Group controlId="formBasicBirthday" className="update-item">
+                        &lt;Form.Label>Birthday:&lt;/Form.Label>
+                        &lt;Form.Control type="data" value={birthday} onChange={e => updateBirthday(e.target.value)} />
+                    &lt;/Form.Group>
+
+                    &lt;div className="update-footer">
+                        &lt;p>We won't ever share your private details with anyone else.&lt;/p>
+
+                        &lt;Button onClick={handleUpdate} variant="light" type="submit" className="button" >Submit&lt;/Button>
+                    &lt;Link to={"/users/:userId"}>
+                        &lt;Button variant="outline-light" className="button">Cancel&lt;/Button>
+                    &lt;/Link>
+                &lt;/div>
+            &lt;/Form>
+        &lt;/div>
+&lt;/Container>
+    )
+}
+
+/**
+ * setting the prop types to the profile update view that are required to update a users profile
+ */
+
+ProfileUpdate.props = {
+    user: PropTypes.shape({
+        Username: PropTypes.string.isRequired,
+        Email: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Birthday: PropTypes.instanceOf(Date).isRequired
+    })
+};
+
+export default connect(null, { setUser })(ProfileUpdate);
+
+/*
+&lt;div class="update-profile" style={{ backgroundImage: `url(${UpdateImage})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
+                &lt;h2> Update your profile&lt;/h2>
+                &lt;Form className="profile-form">
+                    &lt;Form.Group controlID="formBasicUsername" className="update-item">
+                        &lt;Form.Label>Username:&lt;/Form.Label>
+                        &lt;Form.Control type="text" value={username} onChange={e => updateUsername(e.target.value)} placeholder="Update username" autoFocus />
+                        &lt;Form.Text className="text-muted">
+                            Must be alphanumeric and have a minumum of 5 characters.
+                        &lt;/Form.Text>
+                    &lt;/Form.Group>
+
+                    &lt;Form.Group controlId="formBasicpassword" className="update-item">
+                        &lt;Form.Label>Password:&lt;/Form.Label>
+                        &lt;Form.Control type="password" value={password} onChange={e => updatePassword(e.target.value)} placeholder="Update password" />
+                        &lt;Form.Text className="text-muted">
+                            We recommend your password to be 8-20 characters long.
+                        &lt;/Form.Text>
+                &lt;/Form.Group>
+
+                    &lt;Form.Group controlId="formBasicEmail" className="update-item">
+                        &lt;Form.Label>Email:&lt;/Form.Label>
+                        &lt;Form.Control type="email" value={email} onchange={e => updateEmail(e.target.value)} placeholder="Update email" />
+                    &lt;/Form.Group>
+                    
+                    &lt;Form.Group controlId="formBasicBirthday" className="update-item">
+                        &lt;Form.Label>Birthday:&lt;/Form.Label>
+                        &lt;Form.Control type="data" value={birthday} onChange={e => updateBirthday(e.target.value)} />
+                    &lt;/Form.Group>
+
+                    &lt;div className="update-footer">
+                        &lt;p>We won't ever share your private details with anyone else.&lt;/p>
+
+                        &lt;Button onClick={handleUpdate} variant="light" type="submit" className="button" >Submit&lt;/Button>
+                    &lt;Link to={"/users/:userId"}>
+                        &lt;Button variant="outline-light" className="button">Cancel&lt;/Button>
+                    &lt;/Link>
+                &lt;/div>
+            &lt;/Form>
+        &lt;/div>
+export default connect(null, { setUser })(ProfileUpdate);
+*/</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#ProfileUpdate">ProfileUpdate</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Apr 06 2021 09:09:02 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

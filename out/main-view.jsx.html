@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: main-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: main-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { setMovies, setUser } from '../../actions/actions';
+import { RegistrationView } from '../registration-view/registration-view';
+import { LoginView } from '../login-view/login-view';
+import { MovieCard} from '../movie-card/movie-card';
+import { MovieView } from '../movie-view/movie-view';
+import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
+import { ProfileView } from '../profile-view/profile-view';
+import { ProfileUpdate } from '../profile-update/profile-update';
+import { Link } from 'react-router-dom';
+import { Row,Container} from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import './main-view.scss';
+
+/**
+ * @requires React
+ * @requires axios
+ * @requires react-redux
+ * @requires react-router-dom
+ * @requires ../../actions/actions
+ * @requires ../registration-view/registration-view
+ * @requires ../login-view/login-view
+ * @requires ../movie-card/movie-card
+ * @requires ../movie-view/movie-view
+ * @requires ../director-view/director-view
+ * @requires ../genre-view/genre-view
+ * @requires ../profile-view/profile-view
+ * @requires ../profile-update/profile-update
+ * @requires react-bootstrap
+ * @requires react-bootstrap/Button
+ * @requires react-bootstrap/Nav
+ * @requires react-bootstrap/Navbar
+ * @requires ./main-view.scss
+ */
+
+export class MainView extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+             movies: [],
+             user: null 
+      }; 
+    }
+
+    componentDidMount() {
+        let accessToken = localStorage.getItem('token');
+        console.log("component did mount ran")
+        // console.log(accessToken)
+        if (accessToken !== null) {
+            this.setState({
+               user: localStorage.getItem('user'),
+             }); 
+            // this.props.setUser(localStorage.getItem('user'));
+            this.getMovies(accessToken);
+        }
+    }
+
+
+    /**
+     * checking that the user is logged in against the registered users list. If logged in then the auth
+     * data is stored and the full movie view can be rendered
+     * @function onLoggedIn
+     * @param {*} authData 
+     */
+
+    onLoggedIn(authData) {
+        console.log(authData);
+        this.setState({
+            user: authData.user.Username
+        });
+        // this.props.setUser(authData.user.Username);
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.Username);
+        this.getMovies(authData.token);
+    }
+
+/**
+ * API call to get movies from the stored database. The user must be logged in
+ * for this call to return
+ * @function getMovies
+ * @param {string} token 
+ */
+
+    getMovies(token) {
+        // console.log("token", token)
+        axios.get('https://oldmyflix-api.herokuapp.com/movies', {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(response => {
+                console.log(response.data)
+                this.setState({
+                    movies: response.data
+                })
+                // the redux code being implemented
+                // this.props.setMovies(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+
+    /**
+     * function to allow users to log out of the app
+     * @function onLogOut
+     */
+
+    onLogOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.open('/client', '_self');
+    }
+
+
+    /**
+     * rendering the view components. If user is not logged in or registered then they can do so.
+     * Once the user exists then they will receive the full movie view list and be able to navigate
+     * to the profile view and list of their favorite movies
+     * 
+     * 
+     */
+    render() {
+        // if state not initialized this will throw on runtime
+        // before the data is initially loaded
+        console.log('state', this.state)
+        console.log('props', this.props)
+        // now updated for Redux 
+        let { movies, user } = this.state;
+
+        // before the movies have loaded
+        if (!movies) return &lt;div className="main-view" />;
+
+        if (!user) {
+            return (
+                &lt;Router basename="/client">
+                    &lt;div className="main-view">
+                        &lt;Container>
+                            &lt;Route exact path="/" render={() => &lt;LoginView onLoggedIn={user => this.onLoggedIn(user)} />} />
+                            &lt;Route exact path="/register" render={() => &lt;RegistrationView />} />
+                        &lt;/Container>
+                    &lt;/div>
+                &lt;/Router>
+            );
+        } else {
+            
+            return (
+                &lt;Router basename="/client">
+                    &lt;Navbar collapseOnSelect expand="lg" bg="custom" variant="dark" className="fixed-top navbar-main">
+                        &lt;Navbar.Brand as={Link} to="/" className="navbar-brand">&lt;/Navbar.Brand>
+                        &lt;Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        &lt;Navbar.Collapse id="basic-navbar-nav">
+                            &lt;Nav className="mr-auto">
+                                &lt;Nav.Link as={Link} to="/" className="navbar-link">Home&lt;/Nav.Link>
+                                &lt;Nav.Link as={Link} to={`/users/${user}`} className="navbar-link">Profile&lt;/Nav.Link>
+                                &lt;Nav.Link href="https://mmmenges.github.io/portfolio-website" target="_blank" className="navbar-link">My Portfolio&lt;/Nav.Link>
+                            &lt;/Nav>
+                            &lt;Button onClick={this.onLogOut} variant="dark" type="submit" className="button log-out-button"> Log Out&lt;/Button>
+                        &lt;/Navbar.Collapse>
+                    &lt;/Navbar>
+                    &lt;div className="main-view">
+                        &lt;Switch>
+                        {/* &lt;Route exact path="/" render={() => &lt;MoviesList movies={movies} />} /> */}
+                        &lt;Route exact path="/" render={() => {
+                        return (&lt;Row> {movies.map((m) => &lt;MovieCard  key={m._id} movie={m} />)} &lt;/Row>)
+
+                        }}/> 
+                                                
+
+                        
+
+                        &lt;Route path="/movies/:movieId" render={({ match }) => &lt;MovieView movie={movies.find(m => m._id === match.params.movieId)} />} />
+                        &lt;Route path="/directors/:name" render={({ match }) => {
+                          if (!movies || movies.length === 0) return &lt;div className="main-view" />;
+                        return &lt;DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director} />
+                        }} />
+
+                        &lt;Route path="/genres/:name" render={({ match }) => {
+                            if (!movies || movies.length === 0) return &lt;div className="main-view" />;
+                            return &lt;GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre} />
+                        }} />
+                        
+                        &lt;Route path="/users/:userId/update" render={(props) => &lt;ProfileUpdate user={user} {...props} />} />
+
+                        &lt;Route path="/users/:userId" render={(props) => &lt;ProfileView movies={movies}  {...props} />} />
+                        
+                        &lt;/Switch>
+                    &lt;/div>
+                &lt;/Router>
+            );
+        }
+    }
+}
+let mapStateToProps = (state) => {
+    return { movies: state.movies, user: state.user };
+};
+export default connect(mapStateToProps, { setMovies, setUser })(MainView);</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="MainView.html">MainView</a></li></ul><h3>Global</h3><ul><li><a href="global.html#getMovies">getMovies</a></li><li><a href="global.html#onLoggedIn">onLoggedIn</a></li><li><a href="global.html#onLogOut">onLogOut</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Apr 06 2021 08:12:47 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

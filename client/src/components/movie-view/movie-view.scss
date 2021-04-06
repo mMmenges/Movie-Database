@@ -1,0 +1,57 @@
+$primarycolor: #ffffff;
+$secondarycolor: #cccccc;
+$tertiarycolor: #030c61;
+.movie-view-container {
+    margin-top: 8em;
+}
+
+.movie-view {
+    margin: 0 auto;
+}
+
+.movie-container {
+    margin: 50px;
+}
+
+.movie-view-title {
+    font-family: 'Bangers', cursive;
+    font-size: 3em;
+    padding-bottom: 0.5em;
+}
+
+.movie-view-links {
+    display: inline-block;
+    margin: 0.3em;
+}
+
+.movie-view-back {
+    float: right;
+}
+
+.movie-view-text {
+    padding-bottom: 0.6em;
+}
+
+.movie-view-heading {
+    text-align: left;
+    color: $secondarycolor;
+    font-size: 1em;
+}
+
+.movie-view-img {
+    float: left;
+    width: 33em;
+    height: 49em;
+    border: 5px solid $primarycolor;
+    border-radius: 5px;
+    margin-right: 0.5em;
+}
+
+@media all and (max-width: 750px) {
+    .movie-view-img {
+        max-width: 95%;
+    }
+    .movie-view-card {
+        max-width: 95%;
+    }
+}
