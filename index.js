@@ -11,9 +11,6 @@ const Users = Models.User;
 
 const app = express();
 
-app.use(express.static('public'));
-
-
 
 const cors = require('cors');
 app.use(cors());
@@ -43,13 +40,12 @@ const passport = require('passport');
 require('./passport');
 
 const { check, validationResult } = require('express-validator');
+app.use(express.static('public')); // invoke files from the public folder
 
-app.use(express.static('public'));
 app.use("/client", express.static(path.join(__dirname, "client", "dist")));
 app.get("/client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
-
 
 
 //mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -126,7 +122,7 @@ app.get('/movies/directors/:Name', passport.authenticate('jwt', { session: false
 
 app.post('/login',
     passport.authenticate('local'),
-    function(req, res) {
+    function (req, res) {
         /* If this function gets called, athentification was successful. 
         'req.user' contains the authenticated user. */
 
@@ -209,13 +205,13 @@ app.put('/users/:Username', [
     }
 
     Users.findOneAndUpdate({ Username: req.params.Username }, {
-            $set: {
-                Username: req.body.Username,
-                Password: req.body.Password,
-                Email: req.body.Email,
-                Birthday: req.body.Birthday
-            }
-        }, { new: true })
+        $set: {
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+        }
+    }, { new: true })
         .then((updatedUser) => {
             res.json(updatedUser);
         })

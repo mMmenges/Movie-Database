@@ -32904,7 +32904,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"./../utils":"../../node_modules/axios/lib/utils.js","./../core/settle":"../../node_modules/axios/lib/core/settle.js","./../helpers/buildURL":"../../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"../../node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"../../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../../node_modules/axios/lib/core/createError.js","./../helpers/cookies":"../../node_modules/axios/lib/helpers/cookies.js"}],"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js":[function(require,module,exports) {
+},{"./../utils":"../../node_modules/axios/lib/utils.js","./../core/settle":"../../node_modules/axios/lib/core/settle.js","./../helpers/buildURL":"../../node_modules/axios/lib/helpers/buildURL.js","../core/buildFullPath":"../../node_modules/axios/lib/core/buildFullPath.js","./../helpers/parseHeaders":"../../node_modules/axios/lib/helpers/parseHeaders.js","./../helpers/isURLSameOrigin":"../../node_modules/axios/lib/helpers/isURLSameOrigin.js","../core/createError":"../../node_modules/axios/lib/core/createError.js","./../helpers/cookies":"../../node_modules/axios/lib/helpers/cookies.js"}],"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/node_modules/process/browser.js":[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {}; // cached from whatever global is present so that test runners that stub it
@@ -33213,7 +33213,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-},{"./utils":"../../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"../../node_modules/axios/lib/adapters/xhr.js","./adapters/http":"../../node_modules/axios/lib/adapters/xhr.js","process":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/node_modules/process/browser.js"}],"../../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
+},{"./utils":"../../node_modules/axios/lib/utils.js","./helpers/normalizeHeaderName":"../../node_modules/axios/lib/helpers/normalizeHeaderName.js","./adapters/xhr":"../../node_modules/axios/lib/adapters/xhr.js","./adapters/http":"../../node_modules/axios/lib/adapters/xhr.js","process":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/node_modules/process/browser.js"}],"../../node_modules/axios/lib/core/dispatchRequest.js":[function(require,module,exports) {
 'use strict';
 
 var utils = require('./../utils');
@@ -39016,7 +39016,7 @@ FormImpl.Label = _FormLabel.default;
 FormImpl.Text = _FormText.default;
 var _default = FormImpl;
 exports.default = _default;
-},{"@babel/runtime/helpers/esm/extends":"../../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","classnames":"../../node_modules/classnames/index.js","react":"../../node_modules/react/index.js","./FormCheck":"../../node_modules/react-bootstrap/esm/FormCheck.js","./FormFile":"../../node_modules/react-bootstrap/esm/FormFile.js","./FormControl":"../../node_modules/react-bootstrap/esm/FormControl.js","./FormGroup":"../../node_modules/react-bootstrap/esm/FormGroup.js","./FormLabel":"../../node_modules/react-bootstrap/esm/FormLabel.js","./FormText":"../../node_modules/react-bootstrap/esm/FormText.js","./Switch":"../../node_modules/react-bootstrap/esm/Switch.js","./ThemeProvider":"../../node_modules/react-bootstrap/esm/ThemeProvider.js","./createWithBsPrefix":"../../node_modules/react-bootstrap/esm/createWithBsPrefix.js"}],"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/esm/extends":"../../node_modules/@babel/runtime/helpers/esm/extends.js","@babel/runtime/helpers/esm/objectWithoutPropertiesLoose":"../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js","classnames":"../../node_modules/classnames/index.js","react":"../../node_modules/react/index.js","./FormCheck":"../../node_modules/react-bootstrap/esm/FormCheck.js","./FormFile":"../../node_modules/react-bootstrap/esm/FormFile.js","./FormControl":"../../node_modules/react-bootstrap/esm/FormControl.js","./FormGroup":"../../node_modules/react-bootstrap/esm/FormGroup.js","./FormLabel":"../../node_modules/react-bootstrap/esm/FormLabel.js","./FormText":"../../node_modules/react-bootstrap/esm/FormText.js","./Switch":"../../node_modules/react-bootstrap/esm/Switch.js","./ThemeProvider":"../../node_modules/react-bootstrap/esm/ThemeProvider.js","./createWithBsPrefix":"../../node_modules/react-bootstrap/esm/createWithBsPrefix.js"}],"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -39048,7 +39048,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+},{}],"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js":[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -39083,12 +39083,12 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+},{"./bundle-url":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/bundle-url.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/registration-view/register.jpg":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/registration-view/register.jpg":[function(require,module,exports) {
 module.exports = "/register.09e4ff9a.jpg";
 },{}],"components/registration-view/registration-view.jsx":[function(require,module,exports) {
 "use strict";
@@ -39284,7 +39284,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/login-view/login.jpg":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/login-view/login.jpg":[function(require,module,exports) {
 module.exports = "/login.a7679b82.jpg";
 },{}],"components/login-view/login-view.jsx":[function(require,module,exports) {
 "use strict";
@@ -39616,7 +39616,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/movie-card/movie-card.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53152,7 +53152,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/movie-view/movie-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53363,7 +53363,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/director-view/director.jpg":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/director-view/director.jpg":[function(require,module,exports) {
 module.exports = "/director.30dfce2f.jpg";
 },{}],"components/director-view/director-view.jsx":[function(require,module,exports) {
 "use strict";
@@ -53424,11 +53424,11 @@ var DirectorView = /*#__PURE__*/function (_React$Component) {
 
   _createClass(DirectorView, [{
     key: "render",
-    //  constructor(props) {
+    value: //  constructor(props) {
     //    super(props);
     //    this.state = {};
     //  }
-    value: function render() {
+    function render() {
       var director = this.props.director;
       /**
        * renderinge the director view component
@@ -53475,7 +53475,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/genre-view/genre-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -59281,7 +59281,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/profile-view/profile.jpg":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/profile-view/profile.jpg":[function(require,module,exports) {
 module.exports = "/profile.81e471f3.jpg";
 },{}],"components/profile-view/profile-view.jsx":[function(require,module,exports) {
 "use strict";
@@ -59584,7 +59584,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/profile-update/profile-update.jpg":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/profile-update/profile-update.jpg":[function(require,module,exports) {
 module.exports = "/profile-update.fadd8650.jpg";
 },{}],"components/profile-update/profile-update.jsx":[function(require,module,exports) {
 "use strict";
@@ -59836,7 +59836,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"components/main-view/main-view.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60255,7 +60255,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.jsx":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/css-loader.js"}],"index.jsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -60325,7 +60325,7 @@ var MyFlixApplication = /*#__PURE__*/function (_React$Component) {
 
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), document.getElementById('app-container'));
-},{"react":"../../node_modules/react/index.js","react-dom":"../../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-dom":"../../node_modules/react-dom/index.js","redux":"../node_modules/redux/es/redux.js","react-redux":"../node_modules/react-redux/es/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./reducers/reducers":"reducers/reducers.js","./index.scss":"index.scss"}],"../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -60353,7 +60353,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63200" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51539" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -60529,5 +60529,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.jsx"], null)
+},{}]},{},["../../../../../../.nvm/versions/node/v14.15.5/lib/node_modules/parcel/src/builtins/hmr-runtime.js","index.jsx"], null)
 //# sourceMappingURL=/src.78399e21.js.map
