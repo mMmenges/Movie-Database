@@ -278,7 +278,7 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
 
 //client app is here
 app.use(express.static(path.join(__dirname, 'client', 'dist')));
-app.get('/clients*', (req, res) => {
+app.get('/client/*', (req, res) => {
     console.log('ok')
     res.sendFile(path.join(__dirname + '/client/dist/index.html'));
 });
