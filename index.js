@@ -44,6 +44,12 @@ require('./passport');
 
 const { check, validationResult } = require('express-validator');
 
+app.use(express.static('public'));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
 
 
 //mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -273,14 +279,6 @@ app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) =
             console.error(err);
             res.status(500).send('Error: ' + err);
         });
-});
-
-
-//client app is here
-app.use(express.static(path.join(__dirname, 'client', 'dist')));
-app.get('/client/*', (req, res) => {
-    console.log('ok')
-    res.sendFile(path.join(__dirname + '/client/dist/index.html'));
 });
 
 // this is the app listening to the server
